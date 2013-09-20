@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="activetable_color">#FFFFFFFF</color>
+    <color name="table_color">#FF000000</color>
+    <color name="table_text_color">#FFFFFFFF</color>
+    <color name="activetable_text_color">#FF000000</color>
+    <color name="table_divider_color">#FFD3D3D3</color>
+
+</resources>

@@ -1,0 +1,20 @@
+-- Applicable map frameworks --
+
+Framework used within this project:
+    * Google Maps Android API v2
+      --> https://developers.google.com/maps/documentation/android
+
+Alternative framework for Android:
+    * OpenStreetMap-Tools for Android
+      --> https://code.google.com/p/osmdroid
+    
+Another way: include a WebView, so any JavaScript framework can be used:
+    * outdooractive Map API / Google Maps v3
+      --> https://api.outdooractive.com
+    * Leaflet
+      --> http://leafletjs.com
+    * OpenLayers
+      --> http://openlayers.org
+    * MapBox
+      --> http://www.mapbox.com
+    * etc.

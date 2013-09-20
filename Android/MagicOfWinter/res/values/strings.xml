@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Winterzauber</string>
+    <string name="action_tours">Touren</string>
+    <string name="action_map">Karte</string>
+    <string name="layer_winter">outdooractive Winter</string>
+    <string name="layer_ski_slope">outdooractive Skipisten</string>
+    <string name="layer_google_maps">Google Maps</string>
+    <string name="layer_google_hybrid">Google Hybrid</string>
+    <string name="tour_image">Bild zur Tour</string>
+    <string name="tour_details">Tourdetails</string>
+    <string name="loading_data">Daten werden geladen &#8230;</string>
+    <string name="map_not_available">Karte nicht verfügbar</string>
+    <string name="show_tour_in_map">Tour auf Karte zeigen</string>
+    <string name="source">Quelle</string>
+    <string name="author">Autor</string>
+    
+</resources>
