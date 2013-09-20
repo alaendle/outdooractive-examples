@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">A Winter Map</string>
+    <string name="map_not_available">The map is not available.</string>
+
+</resources>
