@@ -16,3 +16,7 @@ gen/
 local.properties
 
 proguard_cache
+
+/Android/MagicOfWinter/libs/scala_library.min.jar
+
+/Android/MagicOfWinter/.cache

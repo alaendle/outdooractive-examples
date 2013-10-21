@@ -17,7 +17,7 @@ import android.widget.ListView;
 import com.outdooractive.api.ObjectLoader;
 import com.outdooractive.api.ObjectLoader.IObjectLoaderListener;
 import com.outdooractive.api.TourList;
-import com.outdooractive.api.TourList.TourHeader;
+import com.outdooractive.api.TourHeader;
 
 public class TourListFragment extends Fragment {
 

@@ -11,7 +11,7 @@ import com.outdooractive.api.CategoryItem;
 import com.outdooractive.api.ObjectLoader;
 import com.outdooractive.api.ObjectLoader.IObjectLoaderListener;
 import com.outdooractive.api.Tour;
-import com.outdooractive.api.TourList.TourHeader;
+import com.outdooractive.api.TourHeader;
 import com.outdooractive.map.MapViewFragment;
 
 public class MainActivity extends Activity implements IActionListener {

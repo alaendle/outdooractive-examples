@@ -1,7 +1,7 @@
-package com.outdooractive.example.magicOfWinter;
+/*package com.outdooractive.example.magicOfWinter;
 
 import com.outdooractive.api.Tour;
-import com.outdooractive.api.TourList.TourHeader;
+import com.outdooractive.api.TourHeader;
 
 public interface IActionListener {
 
@@ -15,3 +15,4 @@ public interface IActionListener {
 
 	public void onOpenTourDetailsRequest(TourHeader tourHeader);
 }
+*/
