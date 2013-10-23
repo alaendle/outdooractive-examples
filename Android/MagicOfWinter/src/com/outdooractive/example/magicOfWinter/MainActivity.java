@@ -44,8 +44,8 @@ public class MainActivity extends Activity implements IActionListener {
 	@Override
 	public void onOpenMapRequest(Tour tour) {
 		Bundle args = new Bundle();
-		args.putString("start", tour != null ? tour.getStartingPoint() : "");
-		args.putString("geometry", tour != null ? tour.getGeometry() : "");
+		args.putString("start", tour != null ? tour.startingPoint() : "");
+		args.putString("geometry", tour != null ? tour.geometry() : "");
 		args.putBoolean("winter", tour != null ? tour.isWinterTour() : false);
 
 		Fragment mapViewFragment = new MapViewFragment();
@@ -88,8 +88,8 @@ public class MainActivity extends Activity implements IActionListener {
 	@Override
 	public void onOpenTourDetailsRequest(TourHeader tourHeader) {
 		Bundle args = new Bundle();
-		args.putInt("tourId", tourHeader.getId());
-		args.putString("tourTitle", tourHeader.getTitle());
+		args.putInt("tourId", tourHeader.id());
+		args.putString("tourTitle", tourHeader.title());
 
 		Fragment tourDetailsFragment = new TourDetailsFragment();
 		tourDetailsFragment.setArguments(args);

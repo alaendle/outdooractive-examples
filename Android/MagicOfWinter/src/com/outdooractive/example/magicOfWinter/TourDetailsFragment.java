@@ -74,7 +74,7 @@ public class TourDetailsFragment extends Fragment {
 			public void onImageLoaded(Drawable image) {
 				imageView.setImageDrawable(image);
 			}
-		}).loadFromWeb(tour.getImageId());
+		}).loadFromWeb(tour.imageId());
 
 		// handle button click to view tour in map
 		openMapButton.setOnClickListener(new OnClickListener() {
@@ -85,8 +85,8 @@ public class TourDetailsFragment extends Fragment {
 		});
 
 		// set description, author, and source
-		descriptionTextView.setText(tour.getLongText());
-		authorTextView.setText(tour.getAuthor());
-		sourceTextView.setText(tour.getSource());
+		descriptionTextView.setText(tour.longText());
+		authorTextView.setText(tour.author());
+		sourceTextView.setText(tour.source());
 	}
 }
