@@ -14,8 +14,8 @@ import android.widget.ListView;
 
 import com.outdooractive.api.ObjectLoader;
 import com.outdooractive.api.ObjectLoader.IObjectLoaderListener;
-import com.outdooractive.api.TourList;
 import com.outdooractive.api.TourHeader;
+import com.outdooractive.api.TourList;
 
 public class TourListFragment extends Fragment {
 
@@ -69,7 +69,7 @@ public class TourListFragment extends Fragment {
 
 		// fill the view with tour list items
 		tourList.clear();
-		tourList.addAll(tours.getTours());
+		tourList.addAll(tours.tours());
 		ArrayAdapter<TourHeader> adapter = new ArrayAdapter<TourHeader>(
 				getActivity(), R.layout.tour_list_item, tourList);
 		listView.setAdapter(adapter);
