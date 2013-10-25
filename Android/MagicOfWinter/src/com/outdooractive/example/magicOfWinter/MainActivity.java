@@ -96,8 +96,8 @@ public class MainActivity extends Activity implements IActionListener {
 	}
 
 	private void openCategoryList(CategoryItem root) {
-		String header = root.getId() == 0 ? getString(R.string.action_tours)
-				: root.getName();
+		String header = root.id() == 0 ? getString(R.string.action_tours)
+				: root.name();
 
 		Bundle args = new Bundle();
 		args.putString("header", header);
@@ -112,8 +112,8 @@ public class MainActivity extends Activity implements IActionListener {
 
 	private void openTourList(CategoryItem parent) {
 		Bundle args = new Bundle();
-		args.putString("header", parent.getName());
-		args.putInt("categoryId", parent.getId());
+		args.putString("header", parent.name());
+		args.putInt("categoryId", parent.id());
 
 		Fragment tourListFragment = new TourListFragment();
 		tourListFragment.setArguments(args);
