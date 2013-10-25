@@ -2,8 +2,6 @@ package com.outdooractive.api;
 
 import java.util.Locale;
 
-import org.json.JSONObject;
-
 import android.content.Context;
 
 import com.outdooractive.api.WebLoaderTask.IWebResultListener;
@@ -14,7 +12,7 @@ public class ObjectLoader {
 	private final String PROJECT_KEY = "yourtest-outdoora-ctiveapi";
 
 	public interface IObjectLoaderListener {
-		public void onObjectLoaded(JSONObject object);
+		public void onObjectLoaded(String json);
 	}
 
 	private Context context;
@@ -58,13 +56,13 @@ public class ObjectLoader {
 	private void loadFromWeb(String request) {
 		new WebLoaderTask(this.context, new IWebResultListener() {
 			@Override
-			public void onResultLoaded(JSONObject result) {
+			public void onResultLoaded(String result) {
 				ObjectLoader.this.onWebResult(result);
 			}
 		}).loadFromWeb(request);
 	}
 
-	private void onWebResult(JSONObject result) {
+	private void onWebResult(String result) {
 		if (this.listener != null) {
 			this.listener.onObjectLoaded(result);
 		}

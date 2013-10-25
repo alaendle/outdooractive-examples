@@ -1,7 +1,5 @@
 package com.outdooractive.example.magicOfWinter;
 
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -62,7 +60,7 @@ public class MainActivity extends Activity implements IActionListener {
 			ObjectLoader objectLoader = new ObjectLoader(this);
 			objectLoader.setListener(new IObjectLoaderListener() {
 				@Override
-				public void onObjectLoaded(JSONObject object) {
+				public void onObjectLoaded(String object) {
 					categoryRoot = new CategoryItem(object);
 					openCategoryList(categoryRoot);
 				}

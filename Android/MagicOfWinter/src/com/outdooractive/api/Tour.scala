@@ -3,7 +3,8 @@ package com.outdooractive.api;
 import org.json.JSONObject
 import android.text.Html
 
-class Tour(json: JSONObject) {
+class Tour(jsonString: String) {
+  val json = new JSONObject(jsonString)
   val tours = json.optJSONArray("tour");
   val tour = tours.optJSONObject(0);
   val metaData = Option(tour.optJSONObject("meta"));             // optional

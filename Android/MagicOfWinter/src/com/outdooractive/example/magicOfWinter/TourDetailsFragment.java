@@ -1,7 +1,5 @@
 package com.outdooractive.example.magicOfWinter;
 
-import org.json.JSONObject;
-
 import android.app.Fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -60,7 +58,7 @@ public class TourDetailsFragment extends Fragment {
 		ObjectLoader objectLoader = new ObjectLoader(this.getActivity());
 		objectLoader.setListener(new IObjectLoaderListener() {
 			@Override
-			public void onObjectLoaded(JSONObject object) {
+			public void onObjectLoaded(String object) {
 				TourDetailsFragment.this.setTour(new Tour(object));
 			}
 		});

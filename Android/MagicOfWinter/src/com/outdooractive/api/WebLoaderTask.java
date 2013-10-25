@@ -10,8 +10,6 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -22,10 +20,10 @@ import android.util.Log;
 
 import com.outdooractive.example.magicOfWinter.R;
 
-public class WebLoaderTask extends AsyncTask<String, Void, JSONObject> {
+public class WebLoaderTask extends AsyncTask<String, Void, String> {
 
 	public interface IWebResultListener {
-		public void onResultLoaded(JSONObject result);
+		public void onResultLoaded(String result);
 	}
 
 	private ProgressDialog progressDialog;
@@ -53,7 +51,7 @@ public class WebLoaderTask extends AsyncTask<String, Void, JSONObject> {
 	}
 
 	@Override
-	protected JSONObject doInBackground(String... params) {
+	protected String doInBackground(String... params) {
 		String request = params[0];
 		Log.i("WebLoaderTask", "Request: " + request);
 
@@ -77,7 +75,7 @@ public class WebLoaderTask extends AsyncTask<String, Void, JSONObject> {
 
 				String resultString = builder.substring(0);
 				Log.i("WebLoaderTask", "Result: " + resultString);
-				return new JSONObject(resultString);
+				return resultString;
 			}
 		} catch (UnknownHostException e) {
 			e.printStackTrace();
@@ -85,14 +83,12 @@ public class WebLoaderTask extends AsyncTask<String, Void, JSONObject> {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (JSONException e) {
-			e.printStackTrace();
 		}
 		return null;
 	}
 
 	@Override
-	protected void onPostExecute(JSONObject result) {
+	protected void onPostExecute(String result) {
 		if (progressDialog != null && progressDialog.isShowing()) {
 			progressDialog.dismiss();
 		}

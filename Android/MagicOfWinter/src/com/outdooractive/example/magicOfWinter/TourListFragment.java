@@ -2,8 +2,6 @@ package com.outdooractive.example.magicOfWinter;
 
 import java.util.ArrayList;
 
-import org.json.JSONObject;
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -57,7 +55,7 @@ public class TourListFragment extends Fragment {
 		ObjectLoader objectLoader = new ObjectLoader(this.getActivity());
 		objectLoader.setListener(new IObjectLoaderListener() {
 			@Override
-			public void onObjectLoaded(JSONObject object) {
+			public void onObjectLoaded(String object) {
 				TourListFragment.this.setListItems(new TourList(object));
 			}
 		});
