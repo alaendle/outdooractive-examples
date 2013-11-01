@@ -1,7 +1,7 @@
 package com.outdooractive.api;
 
-import scala.util.parsing.json.JSON
 import scala.collection.JavaConversions.seqAsJavaList
+import scala.util.parsing.json.JSON
 import android.util.Log
 
 class CC[T] { def unapply(a: Any): Option[T] = Some(a.asInstanceOf[T]) }
