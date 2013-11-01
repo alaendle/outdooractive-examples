@@ -86,7 +86,7 @@ public class MainActivity extends Activity implements IActionListener {
 	@Override
 	public void onOpenTourDetailsRequest(TourHeader tourHeader) {
 		Bundle args = new Bundle();
-		args.putInt("tourId", tourHeader.id());
+		args.putString("tourId", tourHeader.id());
 		args.putString("tourTitle", tourHeader.title());
 
 		Fragment tourDetailsFragment = new TourDetailsFragment();

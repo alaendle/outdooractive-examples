@@ -12,6 +12,6 @@ class TourList(jsonString: String) {
       JObject(tour) <- JsonParser.parse(jsonString)
       JField("id", JString(id)) <- tour
       JField("title", JString(title)) <- tour
-    } yield new TourHeader(id.toInt, title)
+    } yield new TourHeader(id, title)
   }
 }

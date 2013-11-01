@@ -44,11 +44,11 @@ public class ObjectLoader {
 		this.loadFromWeb(request);
 	}
 
-	public void loadTour(int tourId) {
+	public void loadTour(String tourId) {
 		// http://www.outdooractive.com/api/project/app-outdooractive-tage-2013-android/oois/1358951?display=full&categoryHandling=fallback&key=yourtest-outdoora-ctiveapi
 		String request = String
 				.format(Locale.GERMAN,
-						"http://www.outdooractive.com/api/project/%s/oois/%d?lang=de&display=full&categoryHandling=fallback&key=%s",
+						"http://www.outdooractive.com/api/project/%s/oois/%s?lang=de&display=full&categoryHandling=fallback&key=%s",
 						PROJECT_ID, tourId, PROJECT_KEY);
 		this.loadFromWeb(request);
 	}

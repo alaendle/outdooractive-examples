@@ -62,7 +62,7 @@ public class TourDetailsFragment extends Fragment {
 				TourDetailsFragment.this.setTour(new Tour(object));
 			}
 		});
-		objectLoader.loadTour(getArguments().getInt("tourId"));
+		objectLoader.loadTour(getArguments().getString("tourId"));
 	}
 
 	private void setTour(final Tour tour) {
