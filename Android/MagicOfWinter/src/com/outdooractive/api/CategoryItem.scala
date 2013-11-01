@@ -8,6 +8,14 @@ import android.util.Log
 import org.json4s.native.JsonParser
 import org.json4s.DefaultFormats
 
+class CC[T] { def unapply(a: Any): Option[T] = Some(a.asInstanceOf[T]) }
+
+object M extends CC[Map[String, Any]]
+object L extends CC[List[Any]]
+object S extends CC[String]
+object D extends CC[Double]
+object B extends CC[Boolean]
+
 class CategoryItem(x: Map[String, Any]) {
   def this(jsonString: String) = this(JSON.parseFull(jsonString).get.asInstanceOf[Map[String, Any]])
 
