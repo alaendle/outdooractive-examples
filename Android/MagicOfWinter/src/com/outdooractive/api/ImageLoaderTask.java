@@ -10,7 +10,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.util.Log;
 
-public class ImageLoaderTask extends AsyncTask<Integer, Void, Drawable> {
+public class ImageLoaderTask extends AsyncTask<String, Void, Drawable> {
 
 	public interface IImageResultListener {
 		public void onImageLoaded(Drawable image);
@@ -22,13 +22,13 @@ public class ImageLoaderTask extends AsyncTask<Integer, Void, Drawable> {
 		this.listener = listener;
 	}
 
-	public void loadFromWeb(int imageId) {
+	public void loadFromWeb(String imageId) {
 		this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, imageId);
 	}
 
 	@Override
-	protected Drawable doInBackground(Integer... params) {
-		Integer imageId = params[0];
+	protected Drawable doInBackground(String... params) {
+		String imageId = params[0];
 
 		// http://img.oastatic.com/img/400/400//1252046/t
 		String imageUrl = String.format(Locale.GERMAN,
