@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
-jarfile_play-json_2.10-2.2.0.jar_3rdparty=inputjar
+jarfile_json4s-ast_2.10-3.2.5.jar_3rdparty=inputjar
+jarfile_json4s-core_2.10-3.2.5.jar_3rdparty=inputjar
+jarfile_json4s-native_2.10-3.2.5.jar_3rdparty=inputjar
