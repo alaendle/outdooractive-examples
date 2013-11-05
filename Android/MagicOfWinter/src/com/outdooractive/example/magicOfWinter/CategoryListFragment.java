@@ -15,7 +15,7 @@ import android.widget.ListView;
 public class CategoryListFragment extends Fragment {
 
 	private final ArrayList<String> categoryNameList = new ArrayList<String>();
-	private final ArrayList<Integer> categoryIdList = new ArrayList<Integer>();
+	private final ArrayList<String> categoryIdList = new ArrayList<String>();
 	private ListView listView;
 
 	@Override
@@ -34,7 +34,7 @@ public class CategoryListFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				int categoryId = categoryIdList.get(position);
+				String categoryId = categoryIdList.get(position);
 				((IActionListener) getActivity())
 						.onOpenCategoryRequest(categoryId);
 			}
@@ -49,7 +49,7 @@ public class CategoryListFragment extends Fragment {
 
 		// fill the view with category list items
 		this.categoryIdList.clear();
-		this.categoryIdList.addAll(getArguments().getIntegerArrayList(
+		this.categoryIdList.addAll(getArguments().getStringArrayList(
 				"categoryIds"));
 		this.categoryNameList.clear();
 		this.categoryNameList.addAll(getArguments().getStringArrayList(

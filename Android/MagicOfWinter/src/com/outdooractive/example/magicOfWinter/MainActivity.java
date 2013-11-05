@@ -70,7 +70,7 @@ public class MainActivity extends Activity implements IActionListener {
 	}
 
 	@Override
-	public void onOpenCategoryRequest(int categoryId) {
+	public void onOpenCategoryRequest(String categoryId) {
 		CategoryItem root = this.categoryRoot.findById(categoryId);
 		if (root == null) {
 			return;
@@ -96,12 +96,12 @@ public class MainActivity extends Activity implements IActionListener {
 	}
 
 	private void openCategoryList(CategoryItem root) {
-		String header = root.id() == 0 ? getString(R.string.action_tours)
+		String header = root.id() == "0" ? getString(R.string.action_tours)
 				: root.name();
 
 		Bundle args = new Bundle();
 		args.putString("header", header);
-		args.putIntegerArrayList("categoryIds", root.getChildrenIds());
+		args.putStringArrayList("categoryIds", root.getChildrenIds());
 		args.putStringArrayList("categoryNames", root.getChildrenNames());
 
 		Fragment categoryListFragment = new CategoryListFragment();
@@ -113,7 +113,7 @@ public class MainActivity extends Activity implements IActionListener {
 	private void openTourList(CategoryItem parent) {
 		Bundle args = new Bundle();
 		args.putString("header", parent.name());
-		args.putInt("categoryId", parent.id());
+		args.putString("categoryId", parent.id());
 
 		Fragment tourListFragment = new TourListFragment();
 		tourListFragment.setArguments(args);

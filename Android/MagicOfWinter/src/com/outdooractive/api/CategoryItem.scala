@@ -1,35 +1,30 @@
 package com.outdooractive.api;
 
-import scala.util.parsing.json.JSON
 import scala.collection.JavaConversions.asScalaBuffer
 import scala.collection.JavaConversions.bufferAsJavaList
 import scala.collection.JavaConversions.seqAsJavaList
-import android.util.Log
-import org.json4s.native.JsonParser
+
 import org.json4s.DefaultFormats
+import org.json4s.JsonAST.JArray
+import org.json4s.JsonAST.JField
+import org.json4s.JsonAST.JObject
+import org.json4s.JsonAST.JString
+import org.json4s.JsonAST.JValue
+import org.json4s.native.JsonParser
 
-class CC[T] { def unapply(a: Any): Option[T] = Some(a.asInstanceOf[T]) }
+class CategoryItem(x: JValue) {
+  def this(jsonString: String) = this(JsonParser.parse(jsonString))
 
-object M extends CC[Map[String, Any]]
-object L extends CC[List[Any]]
-object S extends CC[String]
-object D extends CC[Double]
-object B extends CC[Boolean]
+  implicit lazy val formats = DefaultFormats
+  val id = (x \ "id").extractOpt[String] getOrElse "0"
+  val name = (x \ "name").extractOpt[String] getOrElse "root"
+  val children: java.util.List[CategoryItem] =
+    for {
+      JArray(categories) <- (x \ "category")
+      category <- categories
+    } yield new CategoryItem(category)
 
-class CategoryItem(x: Map[String, Any]) {
-  def this(jsonString: String) = this(JSON.parseFull(jsonString).get.asInstanceOf[Map[String, Any]])
-
-  val id = x.getOrElse("id", "0").asInstanceOf[String].toInt
-  val name = x.getOrElse("name", "root").asInstanceOf[String]
-  val children: java.util.List[CategoryItem] = for {
-    M(map) <- List(x)
-    L(categories) = map getOrElse ("category", Nil)
-    M(category) <- categories
-  } yield {
-    new CategoryItem(category)
-  }
-
-  def findById(id: Int): CategoryItem = {
+  def findById(id: String): CategoryItem = {
     if (this.id == id) {
       this
     } else {
@@ -41,7 +36,7 @@ class CategoryItem(x: Map[String, Any]) {
 
   override def toString: String = name;
 
-  def getChildrenIds: java.util.ArrayList[Integer] = new java.util.ArrayList[Integer](children.map(x => x.id.asInstanceOf[Integer]))
+  def getChildrenIds: java.util.ArrayList[String] = new java.util.ArrayList[String](children.map(x => x.id))
 
   def getChildrenNames: java.util.ArrayList[String] = new java.util.ArrayList[String](children.map(x => x.name))
 }

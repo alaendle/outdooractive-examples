@@ -59,7 +59,7 @@ public class TourListFragment extends Fragment {
 				TourListFragment.this.setListItems(new TourList(object));
 			}
 		});
-		objectLoader.loadTourList(getArguments().getInt("categoryId"));
+		objectLoader.loadTourList(getArguments().getString("categoryId"));
 	}
 
 	private void setListItems(TourList tours) {

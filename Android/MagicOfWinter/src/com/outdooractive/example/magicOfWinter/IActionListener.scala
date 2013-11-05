@@ -10,7 +10,7 @@ trait IActionListener {
 
   def onOpenTourCategoriesRequest()
 
-  def onOpenCategoryRequest(categoryId: Int)
+  def onOpenCategoryRequest(categoryId: String)
 
   def onOpenTourDetailsRequest(tourHeader: TourHeader)
 }

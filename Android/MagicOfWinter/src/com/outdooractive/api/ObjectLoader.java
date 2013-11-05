@@ -35,11 +35,11 @@ public class ObjectLoader {
 		this.loadFromWeb(request);
 	}
 
-	public void loadTourList(int categoryId) {
+	public void loadTourList(String categoryId) {
 		// http://www.outdooractive.com/api/project/app-outdooractive-tage-2013-android/category/1566501/oois?lang=de&display=minimal&categoryHandling=fallback&key=yourtest-outdoora-ctiveapi
 		String request = String
 				.format(Locale.GERMAN,
-						"http://www.outdooractive.com/api/project/%s/category/%d/oois?lang=de&display=minimal&categoryHandling=fallback&key=%s",
+						"http://www.outdooractive.com/api/project/%s/category/%s/oois?lang=de&display=minimal&categoryHandling=fallback&key=%s",
 						PROJECT_ID, categoryId, PROJECT_KEY);
 		this.loadFromWeb(request);
 	}
