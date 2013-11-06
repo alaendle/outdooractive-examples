@@ -6,9 +6,6 @@ import scala.collection.JavaConversions.seqAsJavaList
 
 import org.json4s.DefaultFormats
 import org.json4s.JsonAST.JArray
-import org.json4s.JsonAST.JField
-import org.json4s.JsonAST.JObject
-import org.json4s.JsonAST.JString
 import org.json4s.JsonAST.JValue
 import org.json4s.native.JsonParser
 
@@ -30,7 +27,7 @@ class CategoryItem(val id: String, val name: String, childJson: JValue) {
     }
   }
 
-  def hasChildren: Boolean = children.size() > 0
+  def hasChildren: Boolean = !children.isEmpty()
 
   override def toString: String = name;
 

@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.outdooractive.api.IImageResultListener;
 import com.outdooractive.api.ImageLoaderTask;
-import com.outdooractive.api.ImageLoaderTask.IImageResultListener;
 import com.outdooractive.api.ObjectLoader;
 import com.outdooractive.api.ObjectLoader.IObjectLoaderListener;
 import com.outdooractive.api.Tour;
