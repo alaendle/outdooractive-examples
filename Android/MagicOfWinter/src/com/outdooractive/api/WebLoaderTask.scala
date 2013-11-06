@@ -1,11 +1,9 @@
 package com.outdooractive.api
 
-import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStreamReader
 
-import org.apache.http.HttpEntity
-import org.apache.http.HttpResponse
+import scala.io.Source
+
 import org.apache.http.client.methods.HttpGet
 import org.apache.http.impl.client.DefaultHttpClient
 
@@ -42,24 +40,12 @@ class WebLoaderTask(val context: Context, val listener: IWebResultListener) exte
     httpGet.addHeader("Accept", "application/json")
     httpGet.addHeader("User-Agent", "Android Test OA")
     try {
-      val httpClient: DefaultHttpClient = new DefaultHttpClient
-      val response: HttpResponse = httpClient.execute(httpGet)
-      val entity: HttpEntity = response.getEntity
-      if (entity != null) {
-        val reader: BufferedReader = new BufferedReader(new InputStreamReader(entity.getContent))
-        var line: String = null
-        val builder: StringBuilder = new StringBuilder
-        while ((({
-          line = reader.readLine; line
-        })) != null) {
-          builder.append(line)
-        }
-        val resultString: String = builder.substring(0)
-        Log.i("WebLoaderTask", "Result: " + resultString)
-        resultString
-      } else {
-        null
-      }
+      val httpClient = new DefaultHttpClient
+      val response = httpClient.execute(httpGet)
+      val entity = Option(response.getEntity)
+      val resultString = entity map (x => Source.fromInputStream(x.getContent).mkString(""))
+      Log.i("WebLoaderTask", "Result: " + resultString)
+      resultString getOrElse (null)
     } catch {
       case e: IOException => {
         e.printStackTrace()
