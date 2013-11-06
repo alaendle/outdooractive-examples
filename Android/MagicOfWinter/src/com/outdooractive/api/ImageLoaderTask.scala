@@ -12,14 +12,15 @@ trait IImageResultListener {
   def onImageLoaded(image: Drawable)
 }
 
-class ImageLoaderTask(val listener: IImageResultListener) extends MyAsyncTask[Void, Drawable] {
+class ImageLoaderTask(val listener: IImageResultListener) extends AsyncTask[AnyRef, Unit, Drawable] {
 
   def loadFromWeb(imageId: String) {
     this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, imageId)
   }
 
-  override def doInBackground1(args: Array[String]): Drawable = {
-    val imageId: String = args(0)
+  // Needs to be AnyRef - workaround for https://issues.scala-lang.org/browse/SI-1459
+  override def doInBackground(args: AnyRef*): Drawable = {
+    val imageId: String = args(0).asInstanceOf[String]
     val imageUrl: String = "http://img.oastatic.com/img/%d/%d/%s/%s/t" format (400, 400, "", imageId)
     Log.i("ImageLoaderTask", "Loading image: " + imageUrl)
     try {
