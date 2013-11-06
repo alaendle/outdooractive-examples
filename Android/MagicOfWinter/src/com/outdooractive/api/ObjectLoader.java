@@ -4,8 +4,6 @@ import java.util.Locale;
 
 import android.content.Context;
 
-import com.outdooractive.api.WebLoaderTask.IWebResultListener;
-
 public class ObjectLoader {
 
 	private final String PROJECT_ID = "app-outdooractive-tage-2013-android";
