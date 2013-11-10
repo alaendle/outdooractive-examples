@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.outdooractive.api.CategoryItem;
+import com.outdooractive.api.IObjectLoaderListener;
 import com.outdooractive.api.ObjectLoader;
-import com.outdooractive.api.ObjectLoader.IObjectLoaderListener;
 import com.outdooractive.api.Tour;
 import com.outdooractive.api.TourHeader;
 import com.outdooractive.map.MapViewFragment;
@@ -57,14 +57,14 @@ public class MainActivity extends Activity implements IActionListener {
 		if (this.categoryRoot != null) {
 			openCategoryList(categoryRoot);
 		} else {
-			ObjectLoader objectLoader = new ObjectLoader(this);
-			objectLoader.setListener(new IObjectLoaderListener() {
-				@Override
-				public void onObjectLoaded(String object) {
-					categoryRoot = new CategoryItem(object);
-					openCategoryList(categoryRoot);
-				}
-			});
+			ObjectLoader objectLoader = new ObjectLoader(this,
+					new IObjectLoaderListener() {
+						@Override
+						public void onObjectLoaded(String object) {
+							categoryRoot = new CategoryItem(object);
+							openCategoryList(categoryRoot);
+						}
+					});
 			objectLoader.loadTourCategories();
 		}
 	}

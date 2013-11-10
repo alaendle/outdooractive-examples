@@ -12,9 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.outdooractive.api.IImageResultListener;
+import com.outdooractive.api.IObjectLoaderListener;
 import com.outdooractive.api.ImageLoaderTask;
 import com.outdooractive.api.ObjectLoader;
-import com.outdooractive.api.ObjectLoader.IObjectLoaderListener;
 import com.outdooractive.api.Tour;
 
 public class TourDetailsFragment extends Fragment {
@@ -55,13 +55,13 @@ public class TourDetailsFragment extends Fragment {
 		super.onActivityCreated(savedInstanceState);
 
 		// load the tour details
-		ObjectLoader objectLoader = new ObjectLoader(this.getActivity());
-		objectLoader.setListener(new IObjectLoaderListener() {
-			@Override
-			public void onObjectLoaded(String object) {
-				TourDetailsFragment.this.setTour(new Tour(object));
-			}
-		});
+		ObjectLoader objectLoader = new ObjectLoader(this.getActivity(),
+				new IObjectLoaderListener() {
+					@Override
+					public void onObjectLoaded(String object) {
+						TourDetailsFragment.this.setTour(new Tour(object));
+					}
+				});
 		objectLoader.loadTour(getArguments().getString("tourId"));
 	}
 
