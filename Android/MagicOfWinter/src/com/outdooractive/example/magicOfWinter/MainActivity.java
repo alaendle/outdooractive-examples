@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.outdooractive.api.CategoryItem;
-import com.outdooractive.api.IObjectLoaderListener;
+import com.outdooractive.api.IStringResultListener;
 import com.outdooractive.api.ObjectLoader;
 import com.outdooractive.api.Tour;
 import com.outdooractive.api.TourHeader;
@@ -58,9 +58,9 @@ public class MainActivity extends Activity implements IActionListener {
 			openCategoryList(categoryRoot);
 		} else {
 			ObjectLoader objectLoader = new ObjectLoader(this,
-					new IObjectLoaderListener() {
+					new IStringResultListener() {
 						@Override
-						public void onObjectLoaded(String object) {
+						public void onResult(String object) {
 							categoryRoot = new CategoryItem(object);
 							openCategoryList(categoryRoot);
 						}

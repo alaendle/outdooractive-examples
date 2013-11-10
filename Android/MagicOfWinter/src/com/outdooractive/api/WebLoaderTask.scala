@@ -15,11 +15,11 @@ import android.content.DialogInterface
 import android.os.AsyncTask
 import android.util.Log
 
-abstract trait IWebResultListener {
-  def onResultLoaded(result: String)
+abstract trait IStringResultListener {
+  def onResult(result: String)
 }
 
-class WebLoaderTask(val context: Context, val listener: IWebResultListener) extends AsyncTask[AnyRef, Void, String] {
+class WebLoaderTask(val context: Context, val listener: IStringResultListener) extends AsyncTask[AnyRef, Void, String] {
 
   def loadFromWeb(request: String) {
     this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, request)
@@ -59,7 +59,7 @@ class WebLoaderTask(val context: Context, val listener: IWebResultListener) exte
       progressDialog.dismiss
     }
     if (result != null && this.listener != null) {
-      this.listener.onResultLoaded(result)
+      this.listener.onResult(result)
     }
   }
 

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.outdooractive.api.IImageResultListener;
-import com.outdooractive.api.IObjectLoaderListener;
+import com.outdooractive.api.IStringResultListener;
 import com.outdooractive.api.ImageLoaderTask;
 import com.outdooractive.api.ObjectLoader;
 import com.outdooractive.api.Tour;
@@ -56,9 +56,9 @@ public class TourDetailsFragment extends Fragment {
 
 		// load the tour details
 		ObjectLoader objectLoader = new ObjectLoader(this.getActivity(),
-				new IObjectLoaderListener() {
+				new IStringResultListener() {
 					@Override
-					public void onObjectLoaded(String object) {
+					public void onResult(String object) {
 						TourDetailsFragment.this.setTour(new Tour(object));
 					}
 				});

@@ -12,7 +12,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.outdooractive.api.IObjectLoaderListener;
+import com.outdooractive.api.IStringResultListener;
 import com.outdooractive.api.ObjectLoader;
 import com.outdooractive.api.TourHeader;
 import com.outdooractive.api.TourList;
@@ -53,9 +53,9 @@ public class TourListFragment extends Fragment {
 
 		// load the list of tours to be displayed
 		ObjectLoader objectLoader = new ObjectLoader(this.getActivity(),
-				new IObjectLoaderListener() {
+				new IStringResultListener() {
 					@Override
-					public void onObjectLoaded(String object) {
+					public void onResult(String object) {
 						TourListFragment.this
 								.setListItems(new TourList(object));
 					}

@@ -3,11 +3,7 @@ package com.outdooractive.api
 import android.content.Context
 import java.util.Locale
 
-abstract trait IObjectLoaderListener {
-  def onObjectLoaded(json: String)
-}
-
-class ObjectLoader(val context: Context, listener: IObjectLoaderListener) {
+class ObjectLoader(val context: Context, listener: IStringResultListener) {
   def loadTourCategories {
     val request = String.format(Locale.GERMAN, "http://www.outdooractive.com/api/project/%s/category/tree/tour/pruned?lang=de&key=%s", PROJECT_ID, PROJECT_KEY)
     this.loadFromWeb(request)
@@ -24,17 +20,7 @@ class ObjectLoader(val context: Context, listener: IObjectLoaderListener) {
   }
 
   private def loadFromWeb(request: String) {
-    new WebLoaderTask(this.context, new IWebResultListener {
-      def onResultLoaded(result: String) {
-        onWebResult(result)
-      }
-    }).loadFromWeb(request)
-  }
-
-  private def onWebResult(result: String) {
-    if (this.listener != null) {
-      this.listener.onObjectLoaded(result)
-    }
+    new WebLoaderTask(this.context, this.listener).loadFromWeb(request)
   }
 
   private final val PROJECT_ID: String = "app-outdooractive-tage-2013-android"
