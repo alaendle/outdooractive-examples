@@ -1,21 +1,20 @@
 package com.outdooractive.api
 
 import android.content.Context
-import java.util.Locale
 
 class ObjectLoader(val context: Context, listener: IStringResultListener) {
   def loadTourCategories {
-    val request = String.format(Locale.GERMAN, "http://www.outdooractive.com/api/project/%s/category/tree/tour/pruned?lang=de&key=%s", PROJECT_ID, PROJECT_KEY)
+    val request = s"http://www.outdooractive.com/api/project/$PROJECT_ID/category/tree/tour/pruned?lang=de&key=$PROJECT_KEY"
     this.loadFromWeb(request)
   }
 
   def loadTourList(categoryId: String) {
-    val request = String.format(Locale.GERMAN, "http://www.outdooractive.com/api/project/%s/category/%s/oois?lang=de&display=minimal&categoryHandling=fallback&key=%s", PROJECT_ID, categoryId, PROJECT_KEY)
+    val request = s"http://www.outdooractive.com/api/project/$PROJECT_ID/category/$categoryId/oois?lang=de&display=minimal&categoryHandling=fallback&key=$PROJECT_KEY"
     this.loadFromWeb(request)
   }
 
   def loadTour(tourId: String) {
-    val request = String.format(Locale.GERMAN, "http://www.outdooractive.com/api/project/%s/oois/%s?lang=de&display=full&categoryHandling=fallback&key=%s", PROJECT_ID, tourId, PROJECT_KEY)
+    val request = s"http://www.outdooractive.com/api/project/$PROJECT_ID/oois/$tourId?lang=de&display=full&categoryHandling=fallback&key=$PROJECT_KEY"
     this.loadFromWeb(request)
   }
 
