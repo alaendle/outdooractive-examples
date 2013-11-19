@@ -1,8 +1,8 @@
 package com.outdooractive.example.magicOfWinter
 
 import com.outdooractive.api.IImageResultListener
-import com.outdooractive.api.IStringResultListener
 import com.outdooractive.api.ImageLoaderTask
+import com.outdooractive.api.Implicits
 import com.outdooractive.api.ObjectLoader
 import com.outdooractive.api.Tour
 
@@ -16,7 +16,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 
-class TourDetailsFragment extends Fragment {
+class TourDetailsFragment extends Fragment with Implicits {
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     getActivity.getActionBar.setTitle(R.string.tour_details)
     getActivity.getActionBar.show
@@ -28,17 +28,15 @@ class TourDetailsFragment extends Fragment {
     descriptionTextView = view.findViewById(R.id.details_text_view).asInstanceOf[TextView]
     authorTextView = view.findViewById(R.id.author_text_view).asInstanceOf[TextView]
     sourceTextView = view.findViewById(R.id.source_text_view).asInstanceOf[TextView]
-    return view
+    view
   }
 
   override def onActivityCreated(savedInstanceState: Bundle) {
     super.onActivityCreated(savedInstanceState)
-    val objectLoader: ObjectLoader = new ObjectLoader(this.getActivity, new IStringResultListener {
-      def onResult(`object`: String) {
-        TourDetailsFragment.this.setTour(new Tour(`object`))
-      }
-    })
-    objectLoader.loadTour(getArguments.getString("tourId"))
+    val objectLoader: ObjectLoader = new ObjectLoader(this.getActivity)
+    objectLoader.loadTour(getArguments.getString("tourId")) onSuccess {
+      case result: Any => this.getActivity runOnUiThread { new Runnable { def run { setTour(new Tour(result)) } } }
+    }
   }
 
   private def setTour(tour: Tour) {

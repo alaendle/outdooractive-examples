@@ -5,7 +5,7 @@
 	<classpathentry kind="lib" path="D:/Projects/outdooractive-examples/Android/MagicOfWinter/3rdparty/json4s-core_2.10-3.2.5.jar"/>
 	<classpathentry kind="lib" path="D:/Projects/outdooractive-examples/Android/MagicOfWinter/3rdparty/json4s-native_2.10-3.2.5.jar"/>
 	<classpathentry exported="true" kind="lib" path="D:/Projects/outdooractive-examples/Android/MagicOfWinter/3rdparty/paranamer-2.5.6.jar"/>
-	<classpathentry kind="lib" path="3rdparty/scaloid_2.10-2.5-8.jar"/>
+	<classpathentry kind="lib" path="D:/Projects/outdooractive-examples/Android/MagicOfWinter/3rdparty/scaloid_2.10-2.5-8.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>

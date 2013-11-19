@@ -2,7 +2,7 @@ package com.outdooractive.example.magicOfWinter
 
 import java.util.ArrayList
 
-import com.outdooractive.api.IStringResultListener
+import com.outdooractive.api.Implicits
 import com.outdooractive.api.ObjectLoader
 import com.outdooractive.api.TourHeader
 import com.outdooractive.api.TourList
@@ -16,7 +16,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 
-class TourListFragment extends Fragment {
+class TourListFragment extends Fragment with Implicits {
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     val header: String = getArguments.getString("header")
     getActivity.getActionBar.setTitle(header)
@@ -29,17 +29,15 @@ class TourListFragment extends Fragment {
         (getActivity.asInstanceOf[IActionListener]).onOpenTourDetailsRequest(item)
       }
     })
-    return view
+    view
   }
 
   override def onActivityCreated(savedInstanceState: Bundle) {
     super.onActivityCreated(savedInstanceState)
-    val objectLoader: ObjectLoader = new ObjectLoader(this.getActivity, new IStringResultListener {
-      def onResult(`object`: String) {
-        TourListFragment.this.setListItems(new TourList(`object`))
-      }
-    })
-    objectLoader.loadTourList(getArguments.getString("categoryId"))
+    val objectLoader: ObjectLoader = new ObjectLoader(this.getActivity)
+    objectLoader.loadTourList(getArguments.getString("categoryId")) onSuccess {
+      case result: Any => this.getActivity runOnUiThread { new Runnable { def run { setListItems(new TourList(result)) } } }
+    }
   }
 
   private def setListItems(tours: TourList) {

@@ -1,18 +1,19 @@
 package com.outdooractive.example.magicOfWinter
 
+import org.scaloid.common.SActivity
+
 import com.outdooractive.api.CategoryItem
-import com.outdooractive.api.IStringResultListener
+import com.outdooractive.api.Implicits
 import com.outdooractive.api.ObjectLoader
 import com.outdooractive.api.Tour
 import com.outdooractive.api.TourHeader
 import com.outdooractive.map.MapViewFragment
 
-import android.app.Activity
 import android.app.Fragment
 import android.os.Bundle
 import android.view.Window
 
-class MainActivity extends Activity with IActionListener {
+class MainActivity extends SActivity with IActionListener with Implicits {
   protected override def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     getWindow.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY)
@@ -44,13 +45,15 @@ class MainActivity extends Activity with IActionListener {
     if (this.categoryRoot != null) {
       openCategoryList(categoryRoot)
     } else {
-      val objectLoader: ObjectLoader = new ObjectLoader(this, new IStringResultListener {
-        def onResult(`object`: String) {
-          categoryRoot = new CategoryItem(`object`)
-          openCategoryList(categoryRoot)
+      val objectLoader = new ObjectLoader(this)
+      objectLoader.loadTourCategories onSuccess {
+        case categories: Any => {
+          runOnUiThread {
+            categoryRoot = new CategoryItem(categories)
+            openCategoryList(categoryRoot)
+          }
         }
-      })
-      objectLoader.loadTourCategories
+      }
     }
   }
 
