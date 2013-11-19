@@ -1,6 +1,5 @@
 package com.outdooractive.example.magicOfWinter
 
-import com.outdooractive.api.IImageResultListener
 import com.outdooractive.api.ImageLoaderTask
 import com.outdooractive.api.Implicits
 import com.outdooractive.api.ObjectLoader
@@ -40,11 +39,10 @@ class TourDetailsFragment extends Fragment with Implicits {
   }
 
   private def setTour(tour: Tour) {
-    new ImageLoaderTask(new IImageResultListener {
-      def onImageLoaded(image: Drawable) {
-        imageView.setImageDrawable(image)
-      }
-    }).loadFromWeb(tour.imageId)
+    ImageLoaderTask loadFromWeb (tour.imageId) onSuccess {
+      case image: Drawable => this.getActivity runOnUiThread { new Runnable { def run { imageView.setImageDrawable(image) } } }
+    }
+
     openMapButton.setOnClickListener(new View.OnClickListener {
       def onClick(v: View) {
         (getActivity.asInstanceOf[IActionListener]).onOpenMapRequest(tour)
