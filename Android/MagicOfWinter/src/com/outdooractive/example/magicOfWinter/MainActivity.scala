@@ -39,16 +39,16 @@ class MainActivity extends SActivity with IActionListener with Implicits {
 
   def onOpenTourCategoriesRequest {
     categoryRoot onSuccess {
-      case categories => runOnUiThread { openCategoryList(categories) }
+      case root: CategoryItem => this.openCategoryList(root)
     }
   }
 
   def onOpenCategoryRequest(categoryId: String) {
     categoryRoot map (_.findById(categoryId)) onSuccess {
       case Some(root) => if (root.hasChildren) {
-        runOnUiThread { this.openCategoryList(root) }
+        this.openCategoryList(root)
       } else {
-        runOnUiThread { this.openTourList(root) }
+        this.openTourList(root)
       }
       case _ =>
     }
