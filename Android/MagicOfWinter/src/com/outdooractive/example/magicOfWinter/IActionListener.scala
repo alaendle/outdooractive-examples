@@ -4,9 +4,7 @@ import com.outdooractive.api.Tour
 import com.outdooractive.api.TourHeader
 
 trait IActionListener {
-  def onOpenMapRequest()
-
-  def onOpenMapRequest(tour: Tour)
+  def onOpenMapRequest(tour: Option[Tour])
 
   def onOpenTourCategoriesRequest()
 

@@ -45,7 +45,7 @@ class TourDetailsFragment extends Fragment with Implicits {
 
     openMapButton.setOnClickListener(new View.OnClickListener {
       def onClick(v: View) {
-        (getActivity.asInstanceOf[IActionListener]).onOpenMapRequest(tour)
+        (getActivity.asInstanceOf[IActionListener]).onOpenMapRequest(Some(tour))
       }
     })
     descriptionTextView.setText(tour.longText)

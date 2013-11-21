@@ -25,7 +25,7 @@ class IntroFragment extends Fragment {
       def onItemClick(parent: AdapterView[_], view: View, position: Int, id: Long) {
         val name: String = listItems.get(position)
         if (name eq getActivity.getString(R.string.action_map)) {
-          (getActivity.asInstanceOf[IActionListener]).onOpenMapRequest
+          (getActivity.asInstanceOf[IActionListener]).onOpenMapRequest(None)
         } else {
           (getActivity.asInstanceOf[IActionListener]).onOpenTourCategoriesRequest
         }

@@ -19,11 +19,11 @@ class CategoryItem(val id: String, val name: String, childJson: JValue) {
       case _ => Nil
     }
 
-  def findById(id: String): CategoryItem = {
+  def findById(id: String): Option[CategoryItem] = {
     if (this.id == id) {
-      this
+      Some(this)
     } else {
-      children.map(_.findById(id)).find(_ != null).getOrElse(null)
+      children.map(_.findById(id)).find(_ != None).getOrElse(None)
     }
   }
 

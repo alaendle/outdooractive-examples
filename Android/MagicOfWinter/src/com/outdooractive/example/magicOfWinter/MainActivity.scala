@@ -27,45 +27,30 @@ class MainActivity extends SActivity with IActionListener with Implicits {
     getFragmentManager.beginTransaction.add(R.id.fragment_container, new IntroFragment).commit
   }
 
-  def onOpenMapRequest {
-    this.onOpenMapRequest(null)
-  }
-
-  def onOpenMapRequest(tour: Tour) {
+  def onOpenMapRequest(tour: Option[Tour]) {
     val args: Bundle = new Bundle
-    args.putString("start", if (tour != null) tour.startingPoint else "")
-    args.putString("geometry", if (tour != null) tour.geometry else "")
-    args.putBoolean("winter", if (tour != null) tour.isWinterTour else false)
-    val mapViewFragment: Fragment = new MapViewFragment
+    args.putString("start", tour.map(_.startingPoint).getOrElse(""))
+    args.putString("geometry", tour.map(_.geometry).getOrElse(""))
+    args.putBoolean("winter", tour.map(_.isWinterTour).getOrElse(false))
+    val mapViewFragment = new MapViewFragment
     mapViewFragment.setArguments(args)
     this.setFragment(mapViewFragment)
   }
 
   def onOpenTourCategoriesRequest {
-    if (this.categoryRoot != null) {
-      openCategoryList(categoryRoot)
-    } else {
-      val objectLoader = new ObjectLoader(this)
-      objectLoader.loadTourCategories onSuccess {
-        case categories: Any => {
-          runOnUiThread {
-            categoryRoot = new CategoryItem(categories)
-            openCategoryList(categoryRoot)
-          }
-        }
-      }
+    categoryRoot onSuccess {
+      case categories => runOnUiThread { openCategoryList(categories) }
     }
   }
 
   def onOpenCategoryRequest(categoryId: String) {
-    val root: CategoryItem = this.categoryRoot.findById(categoryId)
-    if (root == null) {
-      return
-    }
-    if (root.hasChildren) {
-      this.openCategoryList(root)
-    } else {
-      this.openTourList(root)
+    categoryRoot map (_.findById(categoryId)) onSuccess {
+      case Some(root) => if (root.hasChildren) {
+        runOnUiThread { this.openCategoryList(root) }
+      } else {
+        runOnUiThread { this.openTourList(root) }
+      }
+      case _ =>
     }
   }
 
@@ -102,5 +87,8 @@ class MainActivity extends SActivity with IActionListener with Implicits {
     getFragmentManager.beginTransaction.replace(R.id.fragment_container, fragment).addToBackStack(null).commit
   }
 
-  private var categoryRoot: CategoryItem = null
+  private lazy val categoryRoot = {
+    val objectLoader = new ObjectLoader(this)
+    objectLoader.loadTourCategories map (new CategoryItem(_))
+  }
 }
