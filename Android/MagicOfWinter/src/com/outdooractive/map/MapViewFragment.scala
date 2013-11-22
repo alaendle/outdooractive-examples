@@ -1,11 +1,11 @@
 package com.outdooractive.map
 
+import org.scaloid.support.v4.SFragment
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.outdooractive.example.magicOfWinter.R
-import android.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,11 +14,12 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.Toast
+import android.support.v7.app.ActionBarActivity
 
-class MapViewFragment extends Fragment with OnClickListener {
+class MapViewFragment extends SFragment with OnClickListener {
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
-    getActivity.getActionBar.setTitle(R.string.action_map)
-    getActivity.getActionBar.show
+    getActivity.asInstanceOf[ActionBarActivity].getSupportActionBar.setTitle(R.string.action_map)
+    getActivity.asInstanceOf[ActionBarActivity].getSupportActionBar.show
     val view: View = inflater.inflate(R.layout.map_view_fragment, container, false)
     try {
       MapsInitializer.initialize(getActivity)

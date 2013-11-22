@@ -1,6 +1,6 @@
 package com.outdooractive.example.magicOfWinter
 
-import org.scaloid.common.SActivity
+import org.scaloid.support.v4.SFragment
 
 import com.outdooractive.api.CategoryItem
 import com.outdooractive.api.Implicits
@@ -9,22 +9,22 @@ import com.outdooractive.api.Tour
 import com.outdooractive.api.TourHeader
 import com.outdooractive.map.MapViewFragment
 
-import android.app.Fragment
 import android.os.Bundle
+import android.support.v7.app.ActionBarActivity
 import android.view.Window
 
-class MainActivity extends SActivity with IActionListener with Implicits {
+class MainActivity extends ActionBarActivity with IActionListener with Implicits {
   protected override def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
     getWindow.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY)
     getWindow.requestFeature(Window.FEATURE_ACTION_BAR)
-    getActionBar.setDisplayShowHomeEnabled(false)
-    getActionBar.hide
+    getSupportActionBar.setDisplayShowHomeEnabled(false)
+    getSupportActionBar.hide
     setContentView(R.layout.main_activity)
     if (savedInstanceState != null) {
       return
     }
-    getFragmentManager.beginTransaction.add(R.id.fragment_container, new IntroFragment).commit
+    getSupportFragmentManager().beginTransaction.add(R.id.fragment_container, new IntroFragment).commit
   }
 
   def onOpenMapRequest(tour: Option[Tour]) {
@@ -58,7 +58,7 @@ class MainActivity extends SActivity with IActionListener with Implicits {
     val args: Bundle = new Bundle
     args.putString("tourId", tourHeader.id)
     args.putString("tourTitle", tourHeader.title)
-    val tourDetailsFragment: Fragment = new TourDetailsFragment
+    val tourDetailsFragment = new TourDetailsFragment
     tourDetailsFragment.setArguments(args)
     this.setFragment(tourDetailsFragment)
   }
@@ -69,7 +69,7 @@ class MainActivity extends SActivity with IActionListener with Implicits {
     args.putString("header", header)
     args.putStringArrayList("categoryIds", root.getChildrenIds)
     args.putStringArrayList("categoryNames", root.getChildrenNames)
-    val categoryListFragment: Fragment = new CategoryListFragment
+    val categoryListFragment = new CategoryListFragment
     categoryListFragment.setArguments(args)
     this.setFragment(categoryListFragment)
   }
@@ -78,13 +78,13 @@ class MainActivity extends SActivity with IActionListener with Implicits {
     val args: Bundle = new Bundle
     args.putString("header", parent.name)
     args.putString("categoryId", parent.id)
-    val tourListFragment: Fragment = new TourListFragment
+    val tourListFragment = new TourListFragment
     tourListFragment.setArguments(args)
     this.setFragment(tourListFragment)
   }
 
-  private def setFragment(fragment: Fragment) {
-    getFragmentManager.beginTransaction.replace(R.id.fragment_container, fragment).addToBackStack(null).commit
+  private def setFragment(fragment: SFragment) {
+    getSupportFragmentManager().beginTransaction.replace(R.id.fragment_container, fragment).addToBackStack(null).commit
   }
 
   private lazy val categoryRoot = {

@@ -28,7 +28,7 @@
         android:contentDescription="@string/layer_winter"
         android:layout_above="@+id/footer" />
 
-    <GridLayout
+    <android.support.v7.widget.GridLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -81,6 +81,6 @@
             android:text="@string/layer_google_hybrid"
             android:textSize="16sp" />
 
-    </GridLayout>
+    </android.support.v7.widget.GridLayout>
 
 </RelativeLayout>

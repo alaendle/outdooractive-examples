@@ -4,8 +4,6 @@ import com.outdooractive.api.ImageLoaderTask
 import com.outdooractive.api.Implicits
 import com.outdooractive.api.ObjectLoader
 import com.outdooractive.api.Tour
-
-import android.app.Fragment
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,11 +12,13 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import org.scaloid.support.v4.SFragment
+import android.support.v7.app.ActionBarActivity
 
-class TourDetailsFragment extends Fragment with Implicits {
+class TourDetailsFragment extends SFragment with Implicits {
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
-    getActivity.getActionBar.setTitle(R.string.tour_details)
-    getActivity.getActionBar.show
+    getActivity.asInstanceOf[ActionBarActivity].getSupportActionBar.setTitle(R.string.tour_details)
+    getActivity.asInstanceOf[ActionBarActivity].getSupportActionBar.show
     val view: View = inflater.inflate(R.layout.tour_details_fragment, container, false)
     val titleView: TextView = view.findViewById(R.id.details_title_view).asInstanceOf[TextView]
     titleView.setText(getArguments.getString("tourTitle"))

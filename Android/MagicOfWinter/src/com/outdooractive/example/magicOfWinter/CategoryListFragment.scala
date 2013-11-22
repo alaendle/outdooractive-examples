@@ -2,8 +2,10 @@ package com.outdooractive.example.magicOfWinter
 
 import java.util.ArrayList
 
-import android.app.Fragment
+import org.scaloid.support.v4.SFragment
+
 import android.os.Bundle
+import android.support.v7.app.ActionBarActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +13,11 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 
-class CategoryListFragment extends Fragment {
+class CategoryListFragment extends SFragment {
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     val header: String = getArguments.getString("header")
-    getActivity.getActionBar.setTitle(header)
-    getActivity.getActionBar.show
+    getActivity.asInstanceOf[ActionBarActivity].getSupportActionBar.setTitle(header)
+    getActivity.asInstanceOf[ActionBarActivity].getSupportActionBar.show
     val view: View = inflater.inflate(R.layout.category_list_fragment, container, false)
     listView = view.findViewById(R.id.category_list_view).asInstanceOf[ListView]
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener {
