@@ -16,8 +16,8 @@ import android.view.Window
 class MainActivity extends ActionBarActivity with IActionListener with Implicits {
   protected override def onCreate(savedInstanceState: Bundle) {
     super.onCreate(savedInstanceState)
-    getWindow.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY)
-    getWindow.requestFeature(Window.FEATURE_ACTION_BAR)
+    //getWindow.requestFeature(Window.FEATURE_ACTION_BAR_OVERLAY)
+    //getWindow.requestFeature(Window.FEATURE_ACTION_BAR)
     getSupportActionBar.setDisplayShowHomeEnabled(false)
     getSupportActionBar.hide
     setContentView(R.layout.main_activity)
