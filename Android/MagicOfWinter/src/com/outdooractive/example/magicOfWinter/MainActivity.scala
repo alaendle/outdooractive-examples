@@ -11,7 +11,6 @@ import com.outdooractive.map.MapViewFragment
 
 import android.os.Bundle
 import android.support.v7.app.ActionBarActivity
-import android.view.Window
 
 class MainActivity extends ActionBarActivity with IActionListener with Implicits {
   protected override def onCreate(savedInstanceState: Bundle) {
@@ -21,10 +20,9 @@ class MainActivity extends ActionBarActivity with IActionListener with Implicits
     getSupportActionBar.setDisplayShowHomeEnabled(false)
     getSupportActionBar.hide
     setContentView(R.layout.main_activity)
-    if (savedInstanceState != null) {
-      return
+    if (savedInstanceState == null) {
+      getSupportFragmentManager().beginTransaction.add(R.id.fragment_container, new IntroFragment).commit
     }
-    getSupportFragmentManager().beginTransaction.add(R.id.fragment_container, new IntroFragment).commit
   }
 
   def onOpenMapRequest(tour: Option[Tour]) {
