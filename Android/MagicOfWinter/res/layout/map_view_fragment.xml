@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:map="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
@@ -15,36 +14,37 @@
         map:cameraTargetLng="10.218414"
         map:cameraTilt="90"
         map:cameraZoom="17"
-        map:uiZoomControls="false"
-        map:mapType="none" />
-    
-    <ImageView 
+        map:mapType="none"
+        map:uiZoomControls="false" />
+
+    <ImageView
         android:id="@+id/map_logo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/footer"
         android:layout_centerHorizontal="true"
-        android:padding="10dp"
-        android:src="@drawable/img_logo_outdooractive"
         android:contentDescription="@string/layer_winter"
-        android:layout_above="@+id/footer" />
+        android:padding="10dp"
+        android:src="@drawable/img_logo_outdooractive" />
 
-    <GridLayout
+    <android.support.v7.widget.GridLayout
+        xmlns:grid="http://schemas.android.com/apk/res-auto"
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
         android:layout_alignParentBottom="true"
-        android:rowCount="2"
-        android:columnCount="2" >
+        android:layout_margin="5dp"
+        grid:columnCount="2"
+        grid:rowCount="2" >
 
         <CheckBox
             android:id="@+id/cbx_winter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_gravity="fill_horizontal"
-            android:layout_column="0"            
-            android:layout_row="0"
+            grid:layout_column="0"
+            grid:layout_gravity="fill_horizontal"
+            grid:layout_row="0"
             android:text="@string/layer_winter"
             android:textSize="16sp" />
 
@@ -53,20 +53,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_gravity="fill_horizontal"
-            android:layout_column="0"
-            android:layout_row="1"
+            grid:layout_column="0"
+            grid:layout_gravity="fill_horizontal"
+            grid:layout_row="1"
             android:text="@string/layer_ski_slope"
             android:textSize="16sp" />
-        
+
         <CheckBox
             android:id="@+id/cbx_google_maps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_gravity="fill_horizontal"
-            android:layout_column="1"            
-            android:layout_row="0"
+            grid:layout_column="1"
+            grid:layout_gravity="fill_horizontal"
+            grid:layout_row="0"
             android:text="@string/layer_google_maps"
             android:textSize="16sp" />
 
@@ -75,12 +75,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_gravity="fill_horizontal"
-            android:layout_column="1"            
-            android:layout_row="1"
+            grid:layout_column="1"
+            grid:layout_gravity="fill_horizontal"
+            grid:layout_row="1"
             android:text="@string/layer_google_hybrid"
             android:textSize="16sp" />
-
-    </GridLayout>
+    </android.support.v7.widget.GridLayout>
 
 </RelativeLayout>
