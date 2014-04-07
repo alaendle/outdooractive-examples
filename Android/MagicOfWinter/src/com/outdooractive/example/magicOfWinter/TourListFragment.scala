@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
+import org.scaloid.common.runOnUiThread
 import org.scaloid.support.v4.SFragment
 import android.support.v7.app.ActionBarActivity
 
@@ -35,7 +36,7 @@ class TourListFragment extends SFragment with Implicits {
     super.onActivityCreated(savedInstanceState)
     val objectLoader: ObjectLoader = new ObjectLoader(this.getActivity)
     objectLoader.loadTourList(getArguments.getString("categoryId")) onSuccess {
-      case result: Any => this.getActivity runOnUiThread { new Runnable { def run { setListItems(new TourList(result)) } } }
+      case result: Any => runOnUiThread(setListItems(new TourList(result)))
     }
   }
 
@@ -45,7 +46,7 @@ class TourListFragment extends SFragment with Implicits {
     }
     tourList.clear
     tourList.addAll(tours.tours)
-    val adapter: ArrayAdapter[TourHeader] = new ArrayAdapter[TourHeader](getActivity, R.layout.tour_list_item, tourList)
+    val adapter = new ArrayAdapter[TourHeader](getActivity, R.layout.tour_list_item, tourList)
     listView.setAdapter(adapter)
   }
 

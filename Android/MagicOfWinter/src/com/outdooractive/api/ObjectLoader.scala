@@ -1,7 +1,7 @@
 package com.outdooractive.api
 
 import android.content.Context
-import scala.concurrent._
+import scala.concurrent.Future
 
 class ObjectLoader(val context: Context) {
   def loadTourCategories: Future[String] = {
