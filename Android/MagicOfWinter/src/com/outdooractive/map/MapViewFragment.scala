@@ -22,34 +22,30 @@ class MapViewFragment extends SFragment with OnClickListener {
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     getActivity.asInstanceOf[ActionBarActivity].getSupportActionBar.setTitle(R.string.action_map)
     getActivity.asInstanceOf[ActionBarActivity].getSupportActionBar.show
-    val view: View = inflater.inflate(R.layout.map_view_fragment, container, false)
+    val view = inflater.inflate(R.layout.map_view_fragment, container, false)
     try {
       MapsInitializer.initialize(getActivity)
+      mapView = view.findViewById(R.id.map_view).asInstanceOf[MapView]
+      mapView.onCreate(savedInstanceState)
+      val isWinter = getArguments.getBoolean("winter")
+      oaWinter = view.findViewById(R.id.cbx_winter).asInstanceOf[CheckBox]
+      oaWinter.setChecked(isWinter)
+      oaWinter.setOnClickListener(this)
+      oaSlope = view.findViewById(R.id.cbx_ski).asInstanceOf[CheckBox]
+      oaSlope.setChecked(isWinter)
+      oaSlope.setOnClickListener(this)
+      googleMaps = view.findViewById(R.id.cbx_google_maps).asInstanceOf[CheckBox]
+      googleMaps.setOnClickListener(this)
+      googleHybrid = view.findViewById(R.id.cbx_google_hybrid).asInstanceOf[CheckBox]
+      googleHybrid.setChecked(!isWinter)
+      googleHybrid.setOnClickListener(this)
+      this.updateMap
+      this.setCameraPosition
     } catch {
       case e: GooglePlayServicesNotAvailableException => {
         Toast.makeText(getActivity, R.string.map_not_available, Toast.LENGTH_SHORT).show
-        view
       }
     }
-    mapView = view.findViewById(R.id.map_view).asInstanceOf[MapView]
-    mapView.onCreate(savedInstanceState)
-    val isWinter = getArguments.getBoolean("winter")
-    oaWinter = view.findViewById(R.id.cbx_winter).asInstanceOf[CheckBox]
-    oaWinter.setChecked(isWinter)
-    oaWinter.setOnClickListener(this)
-    oaSlope = view.findViewById(R.id.cbx_ski).asInstanceOf[CheckBox]
-    oaSlope.setChecked(isWinter)
-    oaSlope.setOnClickListener(this)
-    googleMaps = view.findViewById(R.id.cbx_google_maps).asInstanceOf[CheckBox]
-    googleMaps.setOnClickListener(this)
-    googleHybrid = view.findViewById(R.id.cbx_google_hybrid).asInstanceOf[CheckBox]
-    googleHybrid.setChecked(!isWinter)
-    googleHybrid.setOnClickListener(this)
-    oaLogo = view.findViewById(R.id.map_logo).asInstanceOf[ImageView]
-    geometry = getArguments.getString("geometry")
-    startPosition = getArguments.getString("start")
-    this.updateMap
-    this.setCameraPosition
     view
   }
 
@@ -101,8 +97,6 @@ class MapViewFragment extends SFragment with OnClickListener {
   }
 
   private def setMapObjects {
-    val geometry: String = getArguments.getString("geometry")
-    val startPosition: String = getArguments.getString("start")
     if (geometry != null && geometry.length > 0) {
       map.addPolyline(MapObjectFactory.createRoute(geometry))
     }
@@ -112,7 +106,7 @@ class MapViewFragment extends SFragment with OnClickListener {
   }
 
   private def setCameraPosition {
-    val position: String = if (startPosition != null && startPosition.length > 0) startPosition else geometry
+    val position = if (startPosition != null && startPosition.length > 0) startPosition else geometry
     if (position != null && position.length > 0) {
       map.moveCamera(MapObjectFactory.updateCamera(position))
     }
@@ -145,7 +139,7 @@ class MapViewFragment extends SFragment with OnClickListener {
   private var oaSlope: CheckBox = null
   private var googleMaps: CheckBox = null
   private var googleHybrid: CheckBox = null
-  private var oaLogo: ImageView = null
-  private[map] var geometry: String = null
-  private[map] var startPosition: String = null
+  private lazy val oaLogo = view.findViewById(R.id.map_logo).asInstanceOf[ImageView]
+  private lazy val geometry = getArguments.getString("geometry")
+  private lazy val startPosition = getArguments.getString("start")
 }
