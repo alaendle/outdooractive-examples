@@ -4,5 +4,5 @@ jarfile_android-support-v7-appcompat.jar_bin=libraryjar
 jarfile_json4s-ast_2.10-3.2.5.jar_3rdparty=inputjar
 jarfile_json4s-core_2.10-3.2.5.jar_3rdparty=inputjar
 jarfile_json4s-native_2.10-3.2.5.jar_3rdparty=inputjar
-jarfile_scaloid-support-v4_2.10-3.0-8-SNAPSHOT.jar_3rdparty=inputjar
-jarfile_scaloid_2.10-3.0-8-SNAPSHOT.jar_3rdparty=inputjar
+jarfile_scaloid-support-v4_2.10-3.3-8-SNAPSHOT.jar_3rdparty=inputjar
+jarfile_scaloid_2.10-3.3-8-SNAPSHOT.jar_3rdparty=inputjar
