@@ -27,9 +27,9 @@ Only considered code under Android/MagicOfWinter/src - measured with CLOC (http:
     <tr>
         <td>Scala</td>
         <td>17</td>
-        <td>96</td>
+        <td>107</td>
         <td>2</td>
-        <td>622</td>
+        <td>616</td>
     </tr>
 </table>
 

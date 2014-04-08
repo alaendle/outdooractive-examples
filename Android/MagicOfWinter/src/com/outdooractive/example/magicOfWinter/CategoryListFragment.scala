@@ -15,22 +15,22 @@ import android.widget.ListView
 
 class CategoryListFragment extends SFragment {
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
-    val header: String = getArguments.getString("header")
+    val header = getArguments.getString("header")
     getActivity.asInstanceOf[ActionBarActivity].getSupportActionBar.setTitle(header)
     getActivity.asInstanceOf[ActionBarActivity].getSupportActionBar.show
-    val view: View = inflater.inflate(R.layout.category_list_fragment, container, false)
-    listView = view.findViewById(R.id.category_list_view).asInstanceOf[ListView]
+    inflater.inflate(R.layout.category_list_fragment, container, false)
+  }
+
+  override def onActivityCreated(savedInstanceState: Bundle) {
+    super.onActivityCreated(savedInstanceState)
+
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener {
       def onItemClick(parent: AdapterView[_], view: View, position: Int, id: Long) {
         val categoryId: String = categoryIdList.get(position)
         (getActivity.asInstanceOf[IActionListener]).onOpenCategoryRequest(categoryId)
       }
     })
-    view
-  }
 
-  override def onActivityCreated(savedInstanceState: Bundle) {
-    super.onActivityCreated(savedInstanceState)
     this.categoryIdList.clear
     this.categoryIdList.addAll(getArguments.getStringArrayList("categoryIds"))
     this.categoryNameList.clear
@@ -39,7 +39,7 @@ class CategoryListFragment extends SFragment {
     listView.setAdapter(adapter)
   }
 
-  private final val categoryNameList: ArrayList[String] = new ArrayList[String]
-  private final val categoryIdList: ArrayList[String] = new ArrayList[String]
-  private var listView: ListView = null
+  private final val categoryNameList = new ArrayList[String]
+  private final val categoryIdList = new ArrayList[String]
+  private lazy val listView = view.findViewById(R.id.category_list_view).asInstanceOf[ListView]
 }

@@ -1,19 +1,22 @@
 package com.outdooractive.example.magicOfWinter
 
+import org.scaloid.common.runOnUiThread
+import org.scaloid.support.v4.SFragment
+
 import com.outdooractive.api.ImageLoaderTask
 import com.outdooractive.api.Implicits
 import com.outdooractive.api.ObjectLoader
 import com.outdooractive.api.Tour
+
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.support.v7.app.ActionBarActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import org.scaloid.support.v4.SFragment
-import android.support.v7.app.ActionBarActivity
 
 class TourDetailsFragment extends SFragment with Implicits {
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
@@ -30,13 +33,13 @@ class TourDetailsFragment extends SFragment with Implicits {
     super.onActivityCreated(savedInstanceState)
     val objectLoader: ObjectLoader = new ObjectLoader(this.getActivity)
     objectLoader.loadTour(getArguments.getString("tourId")) onSuccess {
-      case result: Any => this.getActivity runOnUiThread { new Runnable { def run { setTour(new Tour(result)) } } }
+      case result: Any => runOnUiThread(setTour(new Tour(result)))
     }
   }
 
   private def setTour(tour: Tour) {
     ImageLoaderTask loadFromWeb (tour.imageId) onSuccess {
-      case image: Drawable => this.getActivity runOnUiThread { new Runnable { def run { imageView.setImageDrawable(image) } } }
+      case image: Drawable => runOnUiThread(imageView.setImageDrawable(image))
     }
 
     openMapButton.setOnClickListener(new View.OnClickListener {

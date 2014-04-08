@@ -1,12 +1,15 @@
 package com.outdooractive.map
 
 import org.scaloid.support.v4.SFragment
+
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.MapsInitializer
 import com.outdooractive.example.magicOfWinter.R
+
 import android.os.Bundle
+import android.support.v7.app.ActionBarActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -14,7 +17,6 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.Toast
-import android.support.v7.app.ActionBarActivity
 
 class MapViewFragment extends SFragment with OnClickListener {
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
@@ -31,7 +33,7 @@ class MapViewFragment extends SFragment with OnClickListener {
     }
     mapView = view.findViewById(R.id.map_view).asInstanceOf[MapView]
     mapView.onCreate(savedInstanceState)
-    val isWinter: Boolean = getArguments.getBoolean("winter")
+    val isWinter = getArguments.getBoolean("winter")
     oaWinter = view.findViewById(R.id.cbx_winter).asInstanceOf[CheckBox]
     oaWinter.setChecked(isWinter)
     oaWinter.setOnClickListener(this)
