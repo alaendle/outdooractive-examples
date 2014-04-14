@@ -39,6 +39,7 @@ class MapViewFragment extends SFragment with OnClickListener {
       googleHybrid = view.findViewById(R.id.cbx_google_hybrid).asInstanceOf[CheckBox]
       googleHybrid.setChecked(!isWinter)
       googleHybrid.setOnClickListener(this)
+      oaLogo = view.findViewById(R.id.map_logo).asInstanceOf[ImageView]
       this.updateMap
       this.setCameraPosition
     } catch {
@@ -139,7 +140,7 @@ class MapViewFragment extends SFragment with OnClickListener {
   private var oaSlope: CheckBox = null
   private var googleMaps: CheckBox = null
   private var googleHybrid: CheckBox = null
-  private lazy val oaLogo = view.findViewById(R.id.map_logo).asInstanceOf[ImageView]
+  private var oaLogo: ImageView = null
   private lazy val geometry = getArguments.getString("geometry")
   private lazy val startPosition = getArguments.getString("start")
 }
