@@ -31,30 +31,30 @@ class TourDetailsFragment extends SFragment with Implicits {
 
   override def onActivityCreated(savedInstanceState: Bundle) {
     super.onActivityCreated(savedInstanceState)
-    val objectLoader: ObjectLoader = new ObjectLoader(this.getActivity)
+    val objectLoader = new ObjectLoader(this.getActivity)
     objectLoader.loadTour(getArguments.getString("tourId")) onSuccess {
       case result: Any => runOnUiThread(setTour(new Tour(result)))
     }
   }
 
   private def setTour(tour: Tour) {
+    lazy val imageView = view.findViewById(R.id.tour_image).asInstanceOf[ImageView]
     ImageLoaderTask loadFromWeb (tour.imageId) onSuccess {
       case image: Drawable => runOnUiThread(imageView.setImageDrawable(image))
     }
 
+    val openMapButton = view.findViewById(R.id.btn_map_with_tour).asInstanceOf[Button]
     openMapButton.setOnClickListener(new View.OnClickListener {
       def onClick(v: View) {
         (getActivity.asInstanceOf[IActionListener]).onOpenMapRequest(Some(tour))
       }
     })
+
+    val descriptionTextView = view.findViewById(R.id.details_text_view).asInstanceOf[TextView]
+    val authorTextView = view.findViewById(R.id.author_text_view).asInstanceOf[TextView]
+    val sourceTextView = view.findViewById(R.id.source_text_view).asInstanceOf[TextView]
     descriptionTextView.setText(tour.longText)
     authorTextView.setText(tour.author)
     sourceTextView.setText(tour.source)
   }
-
-  private lazy val imageView = view.findViewById(R.id.tour_image).asInstanceOf[ImageView]
-  private lazy val descriptionTextView = view.findViewById(R.id.details_text_view).asInstanceOf[TextView]
-  private lazy val authorTextView = view.findViewById(R.id.author_text_view).asInstanceOf[TextView]
-  private lazy val sourceTextView = view.findViewById(R.id.source_text_view).asInstanceOf[TextView]
-  private lazy val openMapButton = view.findViewById(R.id.btn_map_with_tour).asInstanceOf[Button]
 }

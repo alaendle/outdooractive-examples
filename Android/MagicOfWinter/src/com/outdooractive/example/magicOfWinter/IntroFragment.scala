@@ -14,18 +14,18 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 
 class IntroFragment extends SFragment {
-  override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
+  override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle) = {
     getActivity.asInstanceOf[ActionBarActivity].getSupportActionBar.hide
-    val view: View = inflater.inflate(R.layout.intro_fragment, container, false)
-    val listItems: ArrayList[String] = new ArrayList[String]
+    val view = inflater.inflate(R.layout.intro_fragment, container, false)
+    val listItems = new ArrayList[String]
     listItems.add(getActivity.getString(R.string.action_map))
     listItems.add(getActivity.getString(R.string.action_tours))
-    val listView: ListView = view.findViewById(R.id.intro_list_view).asInstanceOf[ListView]
-    val adapter: ArrayAdapter[String] = new ArrayAdapter[String](this.getActivity, R.layout.default_list_item, listItems)
+    val listView = view.findViewById(R.id.intro_list_view).asInstanceOf[ListView]
+    val adapter = new ArrayAdapter[String](this.getActivity, R.layout.default_list_item, listItems)
     listView.setAdapter(adapter)
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener {
       def onItemClick(parent: AdapterView[_], view: View, position: Int, id: Long) {
-        val name: String = listItems.get(position)
+        val name = listItems.get(position)
         if (name eq getActivity.getString(R.string.action_map)) {
           (getActivity.asInstanceOf[IActionListener]).onOpenMapRequest(None)
         } else {

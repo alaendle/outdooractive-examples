@@ -32,7 +32,7 @@ class TourListFragment extends SFragment with Implicits {
 
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener {
       def onItemClick(parent: AdapterView[_], view: View, position: Int, id: Long) {
-        val item: TourHeader = tourList.get(position)
+        val item = tourList.get(position)
         (getActivity.asInstanceOf[IActionListener]).onOpenTourDetailsRequest(item)
       }
     })
@@ -53,6 +53,6 @@ class TourListFragment extends SFragment with Implicits {
     listView.setAdapter(adapter)
   }
 
-  private final val tourList: ArrayList[TourHeader] = new ArrayList[TourHeader]
-  private lazy val listView = view.findViewById(R.id.tour_list_view).asInstanceOf[ListView]
+  private final val tourList = new ArrayList[TourHeader]
+  private def listView = view.findViewById(R.id.tour_list_view).asInstanceOf[ListView]
 }

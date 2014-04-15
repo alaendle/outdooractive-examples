@@ -141,6 +141,6 @@ class MapViewFragment extends SFragment with OnClickListener {
   private var googleMaps: CheckBox = null
   private var googleHybrid: CheckBox = null
   private var oaLogo: ImageView = null
-  private lazy val geometry = getArguments.getString("geometry")
-  private lazy val startPosition = getArguments.getString("start")
+  private def geometry = getArguments.getString("geometry")
+  private def startPosition = getArguments.getString("start")
 }

@@ -24,6 +24,7 @@ class CategoryListFragment extends SFragment {
   override def onActivityCreated(savedInstanceState: Bundle) {
     super.onActivityCreated(savedInstanceState)
 
+    val listView = view.findViewById(R.id.category_list_view).asInstanceOf[ListView]
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener {
       def onItemClick(parent: AdapterView[_], view: View, position: Int, id: Long) {
         val categoryId: String = categoryIdList.get(position)
@@ -41,5 +42,4 @@ class CategoryListFragment extends SFragment {
 
   private final val categoryNameList = new ArrayList[String]
   private final val categoryIdList = new ArrayList[String]
-  private lazy val listView = view.findViewById(R.id.category_list_view).asInstanceOf[ListView]
 }
