@@ -1,7 +1,8 @@
 package com.outdooractive.api
 
-import android.content.Context
 import scala.concurrent.Future
+
+import android.content.Context
 
 class ObjectLoader(val context: Context) {
   def loadTourCategories: Future[String] = {
@@ -20,7 +21,7 @@ class ObjectLoader(val context: Context) {
   }
 
   private def loadFromWeb(request: String): Future[String] = {
-    new WebLoaderTask(this.context).loadFromWeb(request)
+    WebLoaderTask.loadFromWeb(this.context, request)
   }
 
   private final val PROJECT_ID: String = "app-outdooractive-tage-2013-android"

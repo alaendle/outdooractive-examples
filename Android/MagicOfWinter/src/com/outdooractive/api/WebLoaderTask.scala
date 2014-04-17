@@ -1,6 +1,5 @@
 package com.outdooractive.api
 
-import scala.concurrent.Future
 import scala.concurrent.future
 import scala.io.Source
 
@@ -14,10 +13,10 @@ import android.content.Context
 import android.content.DialogInterface
 import android.util.Log
 
-class WebLoaderTask(val context: Context) extends Implicits {
+object WebLoaderTask extends Implicits {
 
-  def loadFromWeb(request: String): Future[String] = {
-    val progressDialog = ProgressDialog.show(this.context, "", this.context.getText(R.string.loading_data), true, true, new DialogInterface.OnCancelListener {
+  def loadFromWeb(context: Context, request: String) = {
+    val progressDialog = ProgressDialog.show(context, "", context.getText(R.string.loading_data), true, true, new DialogInterface.OnCancelListener {
       def onCancel(arg0: DialogInterface) {
         arg0.dismiss
       }
@@ -26,14 +25,14 @@ class WebLoaderTask(val context: Context) extends Implicits {
     val f = load(request)
     f onComplete {
       case _ =>
-        if (progressDialog != null && progressDialog.isShowing) {
+        if (progressDialog.isShowing) {
           progressDialog.dismiss
         }
     }
     f
   }
 
-  private def load(request: String): Future[String] = future {
+  private def load(request: String) = future {
     Log.i("WebLoaderTask", "Request: " + request)
     val httpGet: HttpGet = new HttpGet(request)
     httpGet.addHeader("Accept", "application/json")
