@@ -2,8 +2,8 @@ package com.outdooractive.map
 
 import java.net.MalformedURLException
 import java.net.URL
+
 import com.google.android.gms.maps.model.TileOverlayOptions
-import com.google.android.gms.maps.model.TileProvider
 import com.google.android.gms.maps.model.UrlTileProvider
 
 final object MapLayerFactory {
@@ -11,10 +11,10 @@ final object MapLayerFactory {
 
   def outdooractiveSkiresorts: TileOverlayOptions = createOptions("xPiste", -1)
 
-  private def createOptions(tag: String, zIndex: Int): TileOverlayOptions =
+  private def createOptions(tag: String, zIndex: Int) =
     new TileOverlayOptions().tileProvider(createTileProvider(tag)).zIndex(zIndex)
 
-  private def createTileProvider(layerTag: String): TileProvider =
+  private def createTileProvider(layerTag: String) =
     new UrlTileProvider(256, 256) {
       def getTileUrl(x: Int, y: Int, zoom: Int): URL = {
         try {

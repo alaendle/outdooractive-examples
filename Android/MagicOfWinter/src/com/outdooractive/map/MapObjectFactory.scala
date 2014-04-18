@@ -1,6 +1,5 @@
 package com.outdooractive.map
 
-import java.lang.Double
 import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -9,22 +8,22 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.model.PolylineOptions
 import com.outdooractive.example.magicOfWinter.R
+
 import android.graphics.Color
 
 final object MapObjectFactory {
   def createRoute(geometry: String): PolylineOptions = {
-    val coordinates: Array[String] = geometry.split(" ")
-    val options: PolylineOptions = new PolylineOptions
+    val coordinates = geometry.split(" ")
+    val options = new PolylineOptions
     options.zIndex(2)
     options.color(Color.MAGENTA)
-    var i: Int = 0
-    while (i < coordinates.length) {
-      val values: Array[String] = coordinates(i).split(",")
-      val latitude: Double = Double.valueOf(values(1))
-      val longitude: Double = Double.valueOf(values(0))
+    coordinates.map(coordinate => {
+      val values = coordinate.split(",")
+      val latitude = values(1).toDouble
+      val longitude = values(0).toDouble
       options.add(new LatLng(latitude, longitude))
-      i += 1
-    }
+    })
+
     options
   }
 
@@ -36,11 +35,11 @@ final object MapObjectFactory {
     CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder().target(getPosition(geometry)).bearing(0).tilt(90).zoom(17).build)
   }
 
-  private def getPosition(geometry: String): LatLng = {
-    val coordinates: Array[String] = geometry.split(" ")
-    val values: Array[String] = coordinates(0).split(",")
-    val latitude: Double = Double.valueOf(values(1))
-    val longitude: Double = Double.valueOf(values(0))
+  private def getPosition(geometry: String) = {
+    val coordinates = geometry.split(" ")
+    val values = coordinates(0).split(",")
+    val latitude = values(1).toDouble
+    val longitude = values(0).toDouble
     new LatLng(latitude, longitude)
   }
 }
