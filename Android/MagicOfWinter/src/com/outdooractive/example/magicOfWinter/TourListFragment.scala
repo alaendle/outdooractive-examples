@@ -37,8 +37,7 @@ class TourListFragment extends SFragment with Implicits {
       }
     })
 
-    val objectLoader = new ObjectLoader(this.getActivity)
-    objectLoader.loadTourList(getArguments.getString("categoryId")) onSuccess {
+    ObjectLoader.loadTourList(this.getActivity, getArguments.getString("categoryId")) onSuccess {
       case result => runOnUiThread(setListItems(new TourList(result)))
     }
   }

@@ -1,27 +1,21 @@
 package com.outdooractive.api
 
-import scala.concurrent.Future
-
 import android.content.Context
 
-class ObjectLoader(val context: Context) {
-  def loadTourCategories: Future[String] = {
+object ObjectLoader {
+  def loadTourCategories(context: Context) = {
     val request = s"http://www.outdooractive.com/api/project/$PROJECT_ID/category/tree/tour/pruned?lang=de&key=$PROJECT_KEY"
-    this.loadFromWeb(request)
+    WebLoaderTask.loadFromWeb(context, request)
   }
 
-  def loadTourList(categoryId: String): Future[String] = {
+  def loadTourList(context: Context, categoryId: String) = {
     val request = s"http://www.outdooractive.com/api/project/$PROJECT_ID/category/$categoryId/oois?lang=de&display=minimal&categoryHandling=fallback&key=$PROJECT_KEY"
-    this.loadFromWeb(request)
+    WebLoaderTask.loadFromWeb(context, request)
   }
 
-  def loadTour(tourId: String): Future[String] = {
+  def loadTour(context: Context, tourId: String) = {
     val request = s"http://www.outdooractive.com/api/project/$PROJECT_ID/oois/$tourId?lang=de&display=full&categoryHandling=fallback&key=$PROJECT_KEY"
-    this.loadFromWeb(request)
-  }
-
-  private def loadFromWeb(request: String): Future[String] = {
-    WebLoaderTask.loadFromWeb(this.context, request)
+    WebLoaderTask.loadFromWeb(context, request)
   }
 
   private final val PROJECT_ID: String = "app-outdooractive-tage-2013-android"

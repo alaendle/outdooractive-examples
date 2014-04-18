@@ -31,9 +31,8 @@ class TourDetailsFragment extends SFragment with Implicits {
 
   override def onActivityCreated(savedInstanceState: Bundle) {
     super.onActivityCreated(savedInstanceState)
-    val objectLoader = new ObjectLoader(this.getActivity)
-    objectLoader.loadTour(getArguments.getString("tourId")) onSuccess {
-      case result: Any => runOnUiThread(setTour(new Tour(result)))
+    ObjectLoader.loadTour(this.getActivity, getArguments.getString("tourId")) onSuccess {
+      case result => runOnUiThread(setTour(new Tour(result)))
     }
   }
 

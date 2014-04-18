@@ -86,7 +86,6 @@ class MainActivity extends ActionBarActivity with IActionListener with Implicits
   }
 
   private lazy val categoryRoot = {
-    val objectLoader = new ObjectLoader(this)
-    objectLoader.loadTourCategories map (new CategoryItem(_))
+    ObjectLoader.loadTourCategories(this) map (new CategoryItem(_))
   }
 }
