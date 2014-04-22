@@ -1,7 +1,5 @@
 package com.outdooractive.example.magicOfWinter
 
-import org.scaloid.support.v4.SFragment
-
 import com.outdooractive.api.CategoryItem
 import com.outdooractive.api.Implicits
 import com.outdooractive.api.ObjectLoader
@@ -10,6 +8,7 @@ import com.outdooractive.api.TourHeader
 import com.outdooractive.map.MapViewFragment
 
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.app.ActionBarActivity
 
 class MainActivity extends ActionBarActivity with IActionListener with Implicits {
@@ -81,7 +80,7 @@ class MainActivity extends ActionBarActivity with IActionListener with Implicits
     this.setFragment(tourListFragment)
   }
 
-  private def setFragment(fragment: SFragment) {
+  private def setFragment(fragment: Fragment) {
     getSupportFragmentManager().beginTransaction.replace(R.id.fragment_container, fragment).addToBackStack(null).commit
   }
 
