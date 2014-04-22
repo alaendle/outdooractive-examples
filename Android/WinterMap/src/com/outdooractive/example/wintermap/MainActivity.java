@@ -9,14 +9,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.android.gms.maps.model.UrlTileProvider;
 
 public class MainActivity extends Activity {
-
-	private MapView mapView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,38 +29,12 @@ public class MainActivity extends Activity {
 			return;
 		}
 
-		mapView = (MapView) findViewById(R.id.map_view);
-		mapView.onCreate(savedInstanceState);
-
-		GoogleMap map = mapView.getMap();
+		MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
+		GoogleMap map = mapFragment.getMap();
 		if (map != null) {
 			map.addTileOverlay(new TileOverlayOptions()
 					.tileProvider(createWinterTileProvider()));
 		}
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		if (mapView != null) {
-			mapView.onResume();
-		}
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		if (mapView != null) {
-			mapView.onPause();
-		}
-	}
-
-	@Override
-	public void onDestroy() {
-		if (mapView != null) {
-			mapView.onDestroy();
-		}
-		super.onDestroy();
 	}
 
 	private static UrlTileProvider createWinterTileProvider() {

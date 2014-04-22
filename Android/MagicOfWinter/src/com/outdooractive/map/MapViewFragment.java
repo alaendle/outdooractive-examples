@@ -12,13 +12,12 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapsInitializer;
 import com.outdooractive.example.magicOfWinter.R;
 
 public class MapViewFragment extends Fragment implements OnClickListener {
 
-	private MapView mapView;
 	private GoogleMap map;
 	private CheckBox oaWinter;
 	private CheckBox oaSlope;
@@ -43,10 +42,7 @@ public class MapViewFragment extends Fragment implements OnClickListener {
 					Toast.LENGTH_SHORT).show();
 			return view;
 		}
-
-		mapView = (MapView) view.findViewById(R.id.map_view);
-		mapView.onCreate(savedInstanceState);
-
+		
 		boolean isWinter = getArguments().getBoolean("winter");
 
 		oaWinter = (CheckBox) view.findViewById(R.id.cbx_winter);
@@ -74,7 +70,14 @@ public class MapViewFragment extends Fragment implements OnClickListener {
 
 		return view;
 	}
-
+	
+	@Override
+	public void onDestroyView(){
+		Fragment mapFragment = getFragmentManager().findFragmentById(R.id.map_fragment);
+		this.getFragmentManager().beginTransaction().remove(mapFragment).commit();
+		super.onDestroyView();
+	}
+	
 	@Override
 	public void onClick(View v) {
 		if (v.getId() == R.id.cbx_winter && oaWinter.isChecked()) {
@@ -94,7 +97,8 @@ public class MapViewFragment extends Fragment implements OnClickListener {
 
 	private void updateMap() {
 		if (map == null) {
-			map = mapView.getMap();
+			MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
+			map = mapFragment.getMap();
 		}
 
 		if (map != null) {
@@ -146,29 +150,5 @@ public class MapViewFragment extends Fragment implements OnClickListener {
 		if (position != null && position.length() > 0) {
 			map.moveCamera(MapObjectFactory.updateCamera(position));
 		}
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		if (mapView != null) {
-			mapView.onResume();
-		}
-	}
-
-	@Override
-	public void onPause() {
-		super.onPause();
-		if (mapView != null) {
-			mapView.onPause();
-		}
-	}
-
-	@Override
-	public void onDestroy() {
-		if (mapView != null) {
-			mapView.onDestroy();
-		}
-		super.onDestroy();
 	}
 }
