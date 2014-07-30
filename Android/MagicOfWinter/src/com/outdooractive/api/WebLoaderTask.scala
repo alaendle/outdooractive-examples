@@ -1,6 +1,6 @@
 package com.outdooractive.api
 
-import scala.concurrent.future
+import scala.concurrent.Future
 import scala.io.Source
 
 import org.apache.http.client.methods.HttpGet
@@ -32,7 +32,7 @@ object WebLoaderTask extends Implicits {
     f
   }
 
-  private def load(request: String) = future {
+  private def load(request: String) = Future {
     Log.i("WebLoaderTask", "Request: " + request)
     val httpGet: HttpGet = new HttpGet(request)
     httpGet.addHeader("Accept", "application/json")
@@ -42,6 +42,6 @@ object WebLoaderTask extends Implicits {
     val entity = Option(response.getEntity)
     val resultString = entity map (x => Source.fromInputStream(x.getContent).mkString(""))
     Log.i("WebLoaderTask", "Result: " + resultString)
-    resultString get
+    resultString.get
   }
 }

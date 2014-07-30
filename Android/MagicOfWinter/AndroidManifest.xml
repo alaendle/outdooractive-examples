@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.outdooractive.example.magicOfWinter"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0-2.11" >
 
     <!-- Google Maps Android Api V2 -->
     <permission
@@ -21,8 +21,7 @@
     <!-- Google Maps Android Api V2 -->
     
     <uses-sdk
-        android:minSdkVersion="8"
-        android:targetSdkVersion="19" />
+        android:minSdkVersion="10"/>
 
     <application
         android:allowBackup="true"
