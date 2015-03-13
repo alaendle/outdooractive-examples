@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <fragment 
+        class="com.google.android.gms.maps.MapFragment"
+        android:id="@+id/map_fragment"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/footer"
+        map:cameraBearing="120"
+        map:cameraTargetLat="47.560077"
+        map:cameraTargetLng="10.218414"
+        map:cameraTilt="90"
+        map:cameraZoom="17"
+        map:mapType="none"
+        map:uiZoomControls="false" />
+
+    <ImageView
+        android:id="@+id/map_logo"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/footer"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/layer_winter"
+        android:padding="10dp"
+        android:src="@drawable/img_logo_outdooractive" />
+
+    <GridLayout
+        xmlns:grid="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/footer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="5dp"
+        android:columnCount="2"
+        android:rowCount="2" >
+
+        <CheckBox
+            android:id="@+id/cbx_winter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_column="0"
+            android:layout_gravity="fill_horizontal"
+            android:layout_row="0"
+            android:text="@string/layer_winter"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/cbx_ski"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_column="0"
+            android:layout_gravity="fill_horizontal"
+            android:layout_row="1"
+            android:text="@string/layer_ski_slope"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/cbx_google_maps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_column="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_row="0"
+            android:text="@string/layer_google_maps"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/cbx_google_hybrid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_column="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_row="1"
+            android:text="@string/layer_google_hybrid"
+            android:textSize="16sp" />
+    </GridLayout>
+
+</RelativeLayout>

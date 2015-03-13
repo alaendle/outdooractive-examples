@@ -1,9 +1,0 @@
-eclipse.preferences.version=1
-jarfile_android-support-v4.jar_libs=ignore
-jarfile_android-support-v7-appcompat.jar_bin=libraryjar
-jarfile_json4s-ast_2.11-3.2.10.jar_3rdparty=inputjar
-jarfile_json4s-core_2.11-3.2.10.jar_3rdparty=inputjar
-jarfile_json4s-native_2.11-3.2.10.jar_3rdparty=inputjar
-jarfile_org.scala-lang.scala-library_2.11.2.v20140721-095018-73fb460c1c.jar_plugins=inputjar
-jarfile_scaloid-support-v4_2.11-3.5-10-SNAPSHOT.jar_3rdparty=inputjar
-jarfile_scaloid_2.11-3.5-10-SNAPSHOT.jar_3rdparty=inputjar
