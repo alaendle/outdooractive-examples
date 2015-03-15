@@ -11,3 +11,14 @@ before_install:
 - export COMPONENTS=build-tools-22.0.0,android-22,addon-google_apis-google-22,extra-google-m2repository,extra-android-m2repository
 - curl -L https://raw.github.com/embarkmobile/android-sdk-installer/version-2/android-sdk-installer | bash /dev/stdin --install=$COMPONENTS
 - source ~/.android-sdk-installer/env
+
+script: sbt ++$TRAVIS_SCALA_VERSION android:package
+
+deploy:
+  provider: releases
+  api_key:
+    secure: Z/u7TSQiLp6rtR3k/5HosKqnaiEruQ4PEtP84rtDRn//MgVrrWOAgPN8bjgDdJMhGKBBTNr7XwZemj068PUyV7w4983SThH8un6mFyVLGTxPEJmdCDHk2gdpPsh7LSOmMEOhxrfzOxz4PBqbAXe+pM2Zf2e3JF7oLrUJIM+CZxQ=
+  file: ${TRAVIS_BUILD_DIR}/target/com-outdooractive-example-magicOfWinter-debug.apk
+  on:
+    repo: alaendle/outdooractive-examples
+    branch: sbt
