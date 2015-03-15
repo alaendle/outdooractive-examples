@@ -21,4 +21,4 @@ deploy:
   file: ${TRAVIS_BUILD_DIR}/target/com-outdooractive-example-magicOfWinter-debug.apk
   on:
     repo: alaendle/outdooractive-examples
-    branch: sbt
+    branch: master
