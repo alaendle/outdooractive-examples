@@ -19,3 +19,5 @@ proguardOptions in Android ++= Seq(
 )
 
 dexMaxHeap in Android := "1024m"
+
+apkSigningConfig in Android := Option(android.PlainSigningConfig(keystore = file("key.store"), storePass = sys.env("storePass"), alias = "outdooractive"))
