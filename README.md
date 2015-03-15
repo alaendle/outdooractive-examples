@@ -1,13 +1,11 @@
 outdooractive API - Examples (Scala version)
 ============================
-
-This repository gives you access to the outdooractive API examples scala sources.
+This repository gives you access to the outdooractive API examples scala sources. [![Build Status](https://travis-ci.org/alaendle/outdooractive-examples.svg?branch=master)](https://travis-ci.org/alaendle/outdooractive-examples)
 
 See http://developers.outdooractive.com/
 
 
-Comparison of original Java version with current Scala solution.
-Only considered code under Android/MagicOfWinter/src - measured with CLOC (http://cloc.sourceforge.net/).
+Comparison of original Java version with current Scala solution - measured with CLOC (http://cloc.sourceforge.net/).
 
 <table>
     <tr>

@@ -18,7 +18,7 @@ deploy:
   provider: releases
   api_key:
     secure: V1TtRfwhYm7dRRDEUnLMs0t5vIymnIMd/+DtuEvNzgBt4+Vtn7VcWzw2gmEg1UTnwTeDBOuzUZKmBslJ9B4Ts0pUaqNmWcD+8EDs3s58QFFTY3OT6ZVG/V84xyLg0b/bRhAD9/9UZuJuHbf9Y/29IvysUAKXG7nsUHXRFFtSZlg=
-  file: ${TRAVIS_BUILD_DIR}/target/com-outdooractive-example-magicOfWinter-debug.apk
+  file: ${TRAVIS_BUILD_DIR}/target/android-bin/com-outdooractive-example-magicOfWinter-debug.apk
   on:
     repo: alaendle/outdooractive-examples
     tags: true
