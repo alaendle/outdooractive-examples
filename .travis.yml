@@ -17,8 +17,7 @@ script: sbt ++$TRAVIS_SCALA_VERSION android:package
 deploy:
   provider: releases
   api_key:
-    secure: Z/u7TSQiLp6rtR3k/5HosKqnaiEruQ4PEtP84rtDRn//MgVrrWOAgPN8bjgDdJMhGKBBTNr7XwZemj068PUyV7w4983SThH8un6mFyVLGTxPEJmdCDHk2gdpPsh7LSOmMEOhxrfzOxz4PBqbAXe+pM2Zf2e3JF7oLrUJIM+CZxQ=
+    secure: V1TtRfwhYm7dRRDEUnLMs0t5vIymnIMd/+DtuEvNzgBt4+Vtn7VcWzw2gmEg1UTnwTeDBOuzUZKmBslJ9B4Ts0pUaqNmWcD+8EDs3s58QFFTY3OT6ZVG/V84xyLg0b/bRhAD9/9UZuJuHbf9Y/29IvysUAKXG7nsUHXRFFtSZlg=
   file: ${TRAVIS_BUILD_DIR}/target/com-outdooractive-example-magicOfWinter-debug.apk
   on:
     repo: alaendle/outdooractive-examples
-    branch: master
