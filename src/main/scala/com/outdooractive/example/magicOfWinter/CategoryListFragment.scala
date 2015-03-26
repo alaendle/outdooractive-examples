@@ -1,7 +1,5 @@
 package com.outdooractive.example.magicOfWinter
 
-import java.util.ArrayList
-
 import android.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,22 +20,18 @@ class CategoryListFragment extends Fragment {
   override def onActivityCreated(savedInstanceState: Bundle) {
     super.onActivityCreated(savedInstanceState)
 
+    val categoryIdList = getArguments.getStringArrayList("categoryIds")
+    val categoryNameList = getArguments.getStringArrayList("categoryNames")
+
     val listView = this.getView.findViewById(R.id.category_list_view).asInstanceOf[ListView]
     listView.setOnItemClickListener(new AdapterView.OnItemClickListener {
       def onItemClick(parent: AdapterView[_], view: View, position: Int, id: Long) {
-        val categoryId: String = categoryIdList.get(position)
+        val categoryId = categoryIdList.get(position)
         getActivity.asInstanceOf[IActionListener].onOpenCategoryRequest(categoryId)
       }
     })
 
-    this.categoryIdList.clear()
-    this.categoryIdList.addAll(getArguments.getStringArrayList("categoryIds"))
-    this.categoryNameList.clear()
-    this.categoryNameList.addAll(getArguments.getStringArrayList("categoryNames"))
-    val adapter: ArrayAdapter[String] = new ArrayAdapter[String](this.getActivity, R.layout.default_list_item, this.categoryNameList)
+    val adapter = new ArrayAdapter[String](this.getActivity, R.layout.default_list_item, categoryNameList)
     listView.setAdapter(adapter)
   }
-
-  private final val categoryNameList = new ArrayList[String]
-  private final val categoryIdList = new ArrayList[String]
 }
