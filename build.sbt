@@ -1,5 +1,7 @@
 scalaVersion := "2.11.6"
 
+resolvers += "jcenter" at "http://jcenter.bintray.com"
+
 libraryDependencies ++= Seq(
   "com.google.android.gms" % "play-services" % "6.5.87",
   aar("org.macroid" %% "macroid" % "2.0.0-M3"),
