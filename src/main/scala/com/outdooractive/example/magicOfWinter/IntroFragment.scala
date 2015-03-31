@@ -1,7 +1,5 @@
 package com.outdooractive.example.magicOfWinter
 
-import java.util.ArrayList
-
 import android.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,10 +10,10 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 
 class IntroFragment extends Fragment {
-  override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle) = {
+  override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
     getActivity.getActionBar.hide()
     val view = inflater.inflate(R.layout.intro_fragment, container, false)
-    val listItems = new ArrayList[String]
+    val listItems = new java.util.ArrayList[String]
     listItems.add(getActivity.getString(R.string.action_map))
     listItems.add(getActivity.getString(R.string.action_tours))
     val listView = view.findViewById(R.id.intro_list_view).asInstanceOf[ListView]

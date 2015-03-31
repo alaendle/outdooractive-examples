@@ -67,38 +67,33 @@ class MapViewFragment extends Fragment with OnClickListener {
   }
 
   private def setMapOverlays() {
-    map match {
-      case Some(map) =>
-        map.clear()
-        map.setMapType(GoogleMap.MAP_TYPE_NONE)
-        if (googleMaps.isChecked) {
-          map.setMapType(GoogleMap.MAP_TYPE_NORMAL)
-        } else if (googleHybrid.isChecked) {
-          map.setMapType(GoogleMap.MAP_TYPE_HYBRID)
-        } else if (oaWinter.isChecked) {
-          map.addTileOverlay(MapLayerFactory.outdooractiveWinter)
-        }
-        if (oaSlope.isChecked) {
-          map.addTileOverlay(MapLayerFactory.outdooractiveSkiresorts)
-        }
-      case None =>
-    }
+    map foreach (map => {
+      map.clear()
+      map.setMapType(GoogleMap.MAP_TYPE_NONE)
+      if (googleMaps.isChecked) {
+        map.setMapType(GoogleMap.MAP_TYPE_NORMAL)
+      } else if (googleHybrid.isChecked) {
+        map.setMapType(GoogleMap.MAP_TYPE_HYBRID)
+      } else if (oaWinter.isChecked) {
+        map.addTileOverlay(MapLayerFactory.outdooractiveWinter)
+      }
+      if (oaSlope.isChecked) {
+        map.addTileOverlay(MapLayerFactory.outdooractiveSkiResorts)
+      }
+    })
   }
 
   private def setMapObjects() {
-    if (geometry != null && geometry.length > 0) {
-      map map (_.addPolyline(MapObjectFactory.createRoute(geometry)))
-    }
-    if (startPosition != null && startPosition.length > 0) {
-      map map (_.addMarker(MapObjectFactory.createMarker(startPosition)))
-    }
+    geometry.filter(_.length > 0) foreach
+      (x => map foreach (_.addPolyline(MapObjectFactory.createRoute(x))))
+    startPosition.filter(_.length > 0) foreach
+      (x => map foreach (_.addMarker(MapObjectFactory.createMarker(x))))
   }
 
   private def setCameraPosition() {
-    val position = if (startPosition != null && startPosition.length > 0) startPosition else geometry
-    if (position != null && position.length > 0) {
-      map map (_.moveCamera(MapObjectFactory.updateCamera(position)))
-    }
+    val position = if (startPosition.exists(x => x.length > 0)) startPosition else geometry
+    position.filter(_.length > 0) foreach
+      (x => map foreach (_.moveCamera(MapObjectFactory.updateCamera(x))))
   }
 
   private def map = Option(getChildFragmentManager.findFragmentById(R.id.map_fragment).asInstanceOf[MapFragment].getMap)
@@ -107,6 +102,6 @@ class MapViewFragment extends Fragment with OnClickListener {
   private def googleMaps = getView.findViewById(R.id.cbx_google_maps).asInstanceOf[CheckBox]
   private def googleHybrid = getView.findViewById(R.id.cbx_google_hybrid).asInstanceOf[CheckBox]
   private def oaLogo = getView.findViewById(R.id.map_logo).asInstanceOf[ImageView]
-  private def geometry = getArguments.getString("geometry")
-  private def startPosition = getArguments.getString("start")
+  private def geometry = Option(getArguments.getString("geometry"))
+  private def startPosition = Option(getArguments.getString("start"))
 }

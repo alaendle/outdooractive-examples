@@ -18,19 +18,15 @@ class MainActivity extends Activity with IActionListener with Implicits {
     getActionBar.setDisplayShowHomeEnabled(false)
     getActionBar.hide()
     setContentView(R.layout.main_activity)
-    if (savedInstanceState == null) {
-      getFragmentManager.beginTransaction.add(R.id.fragment_container, new IntroFragment).commit
-    }
+    Option(savedInstanceState) getOrElse getFragmentManager.beginTransaction.add(R.id.fragment_container, new IntroFragment).commit
   }
 
   def onOpenMapRequest(tour: Option[Tour]) {
-    val args: Bundle = new Bundle
+    val args = new Bundle
     args.putString("start", tour.map(_.startingPoint).getOrElse(""))
     args.putString("geometry", tour.map(_.geometry).getOrElse(""))
     args.putBoolean("winter", tour.exists(_.isWinterTour))
-    val mapViewFragment = new MapViewFragment
-    mapViewFragment.setArguments(args)
-    this.setFragment(mapViewFragment)
+    this.setFragment(new MapViewFragment, args)
   }
 
   def onOpenTourCategoriesRequest() {
@@ -51,36 +47,31 @@ class MainActivity extends Activity with IActionListener with Implicits {
   }
 
   def onOpenTourDetailsRequest(tourHeader: TourHeader) {
-    val args: Bundle = new Bundle
+    val args = new Bundle
     args.putString("tourId", tourHeader.id)
     args.putString("tourTitle", tourHeader.title)
-    val tourDetailsFragment = new TourDetailsFragment
-    tourDetailsFragment.setArguments(args)
-    this.setFragment(tourDetailsFragment)
+    this.setFragment(new TourDetailsFragment, args)
   }
 
   private def openCategoryList(root: CategoryItem) {
-    val header: String = if (root.id eq "0") getString(R.string.action_tours) else root.name
-    val args: Bundle = new Bundle
+    val header = if (root.id eq "0") getString(R.string.action_tours) else root.name
+    val args = new Bundle
     args.putString("header", header)
     args.putStringArrayList("categoryIds", root.getChildrenIds)
     args.putStringArrayList("categoryNames", root.getChildrenNames)
-    val categoryListFragment = new CategoryListFragment
-    categoryListFragment.setArguments(args)
-    this.setFragment(categoryListFragment)
+    this.setFragment(new CategoryListFragment, args)
   }
 
   private def openTourList(parent: CategoryItem) {
-    val args: Bundle = new Bundle
+    val args = new Bundle
     args.putString("header", parent.name)
     args.putString("categoryId", parent.id)
-    val tourListFragment = new TourListFragment
-    tourListFragment.setArguments(args)
-    this.setFragment(tourListFragment)
+    this.setFragment(new TourListFragment, args)
   }
 
-  private def setFragment(fragment: Fragment) {
-    getFragmentManager.beginTransaction.replace(R.id.fragment_container, fragment).addToBackStack(null).commit
+  private def setFragment(fragment: Fragment, args: Bundle) {
+    fragment.setArguments(args)
+    getFragmentManager.beginTransaction.replace(R.id.fragment_container, fragment).addToBackStack("activeFragment").commit
   }
 
   private lazy val categoryRoot = {

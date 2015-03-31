@@ -25,10 +25,10 @@ Comparison of original Java version with current Scala solution - measured with 
     <tr>
         <td>Scala</td>
         <td>17</td>
-        <td>98</td>
+        <td>97</td>
         <td>2</td>
-        <td>553</td>
+        <td>534</td>
     </tr>
 </table>
 
-Means that the code in Scala is more than 30% shorter than the original java source. And this is only the beginning - my guess is that with some more refactorings another 10% can be saved - and this for sure without introducing any complex/unreadable constructs; the opposite is true, the resulting code will reveal the intent more clearly.
+Means that the code in Scala is more than 40% shorter than the original java source - and this without the introduction of any complex/unreadable constructs; the opposite is true, the resulting code will reveal the intent more clearly.

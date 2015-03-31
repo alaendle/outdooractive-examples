@@ -6,10 +6,10 @@ import java.net.URL
 import com.google.android.gms.maps.model.TileOverlayOptions
 import com.google.android.gms.maps.model.UrlTileProvider
 
-final object MapLayerFactory {
+object MapLayerFactory {
   def outdooractiveWinter: TileOverlayOptions = createOptions("AlpsteinWinter", -2)
 
-  def outdooractiveSkiresorts: TileOverlayOptions = createOptions("xPiste", -1)
+  def outdooractiveSkiResorts: TileOverlayOptions = createOptions("xPiste", -1)
 
   private def createOptions(tag: String, zIndex: Int) =
     new TileOverlayOptions().tileProvider(createTileProvider(tag)).zIndex(zIndex)
@@ -22,7 +22,7 @@ final object MapLayerFactory {
           new URL(s"http://e$serverId.oastatic.com/map/$layerTag/$zoom/$x/$y.png")
         } catch {
           case e: MalformedURLException =>
-            null
+            null // scalastyle:ignore - since null is a accepted return value.
         }
       }
     }

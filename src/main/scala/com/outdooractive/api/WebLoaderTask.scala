@@ -15,7 +15,7 @@ import android.util.Log
 
 object WebLoaderTask extends Implicits {
 
-  def loadFromWeb(context: Context, request: String) = {
+  def loadFromWeb(context: Context, request: String): Future[String] = {
     val progressDialog = ProgressDialog.show(context, "", context.getText(R.string.loading_data), true, true, new DialogInterface.OnCancelListener {
       def onCancel(arg0: DialogInterface) {
         arg0.dismiss()
@@ -33,15 +33,15 @@ object WebLoaderTask extends Implicits {
   }
 
   private def load(request: String) = Future {
-    Log.i("WebLoaderTask", "Request: " + request)
-    val httpGet: HttpGet = new HttpGet(request)
+    Log.i(WebLoaderTask.getClass.getName, "Request: " + request)
+    val httpGet = new HttpGet(request)
     httpGet.addHeader("Accept", "application/json")
     httpGet.addHeader("User-Agent", "Android Test OA")
     val httpClient = new DefaultHttpClient
     val response = httpClient.execute(httpGet)
     val entity = Option(response.getEntity)
     val resultString = entity map (x => Source.fromInputStream(x.getContent).mkString(""))
-    Log.i("WebLoaderTask", "Result: " + resultString)
+    Log.i(WebLoaderTask.getClass.getName, "Result: " + resultString)
     resultString.get
   }
 }

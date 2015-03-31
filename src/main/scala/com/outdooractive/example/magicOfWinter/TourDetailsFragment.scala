@@ -13,7 +13,7 @@ import com.outdooractive.api.ImageLoaderTask
 import com.outdooractive.api.Implicits
 import com.outdooractive.api.ObjectLoader
 import com.outdooractive.api.Tour
-import org.scaloid.common.runOnUiThread
+import macroid.Ui
 
 class TourDetailsFragment extends Fragment with Implicits {
   override def onCreateView(inflater: LayoutInflater, container: ViewGroup, savedInstanceState: Bundle): View = {
@@ -29,14 +29,14 @@ class TourDetailsFragment extends Fragment with Implicits {
   override def onActivityCreated(savedInstanceState: Bundle) {
     super.onActivityCreated(savedInstanceState)
     ObjectLoader.loadTour(this.getActivity, getArguments.getString("tourId")) onSuccess {
-      case result => runOnUiThread(setTour(new Tour(result)))
+      case result: String => Ui { setTour(new Tour(result)) }.run
     }
   }
 
   private def setTour(tour: Tour) {
     lazy val imageView = getView.findViewById(R.id.tour_image).asInstanceOf[ImageView]
     ImageLoaderTask loadFromWeb tour.imageId onSuccess {
-      case image: Drawable => runOnUiThread(imageView.setImageDrawable(image))
+      case image: Drawable => Ui { imageView.setImageDrawable(image) }.run
     }
 
     val openMapButton = getView.findViewById(R.id.btn_map_with_tour).asInstanceOf[Button]
