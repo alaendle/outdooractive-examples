@@ -3,12 +3,12 @@ scalaVersion := "2.11.6"
 resolvers += "jcenter" at "http://jcenter.bintray.com"
 
 libraryDependencies ++= Seq(
-  "com.google.android.gms" % "play-services" % "6.5.87",
-  aar("org.macroid" %% "macroid" % "2.0.0-M3"),
+  "com.google.android.gms" % "play-services" % "7.5.0",
+  aar("org.macroid" %% "macroid" % "2.0.0-M4"),
   "org.json4s" %% "json4s-native" % "3.2.11"
 )
 
-proguardCache in Android += ProguardCache("org.json4s") % "org.json4s" %% "json4s-core"
+proguardCache in Android += "org.json4s"
 
 proguardOptions in Android ++= Seq(
   "-keep class * extends java.util.ListResourceBundle { protected Object[][] getContents(); }",
