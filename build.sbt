@@ -3,7 +3,7 @@ scalaVersion := "2.11.6"
 resolvers += "jcenter" at "http://jcenter.bintray.com"
 
 libraryDependencies ++= Seq(
-  "com.google.android.gms" % "play-services" % "7.5.0",
+  "com.google.android.gms" % "play-services-maps" % "7.5.0",
   aar("org.macroid" %% "macroid" % "2.0.0-M4"),
   "org.json4s" %% "json4s-native" % "3.2.11"
 )
