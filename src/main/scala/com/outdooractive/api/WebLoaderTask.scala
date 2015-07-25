@@ -40,7 +40,7 @@ object WebLoaderTask extends Implicits {
     val httpClient = new DefaultHttpClient
     val response = httpClient.execute(httpGet)
     val entity = Option(response.getEntity)
-    val resultString = entity map (x => Source.fromInputStream(x.getContent).mkString(""))
+    val resultString = entity map (x => Source.fromInputStream(x.getContent()).mkString(""))
     Log.i(WebLoaderTask.getClass.getName, "Result: " + resultString)
     resultString.get
   }

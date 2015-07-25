@@ -1,4 +1,5 @@
 scalaVersion := "2.11.7"
+scalacOptions += "-Xexperimental"
 
 resolvers += "jcenter" at "http://jcenter.bintray.com"
 

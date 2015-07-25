@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 
@@ -24,11 +23,9 @@ class CategoryListFragment extends Fragment {
     val categoryNameList = getArguments.getStringArrayList("categoryNames")
 
     val listView = this.getView.findViewById(R.id.category_list_view).asInstanceOf[ListView]
-    listView.setOnItemClickListener(new AdapterView.OnItemClickListener {
-      def onItemClick(parent: AdapterView[_], view: View, position: Int, id: Long) {
-        val categoryId = categoryIdList.get(position)
-        getActivity.asInstanceOf[IActionListener].onOpenCategoryRequest(categoryId)
-      }
+    listView.setOnItemClickListener((_, _, position, _) => {
+      val categoryId = categoryIdList.get(position)
+      getActivity.asInstanceOf[IActionListener].onOpenCategoryRequest(categoryId)
     })
 
     val adapter = new ArrayAdapter[String](this.getActivity, R.layout.default_list_item, categoryNameList)
