@@ -13,6 +13,9 @@ android {
             keyPassword System.getenv("storePass")
         }
     }
+    lintOptions {
+        abortOnError false
+    }
     defaultConfig {
         applicationId "com.outdooractive.example.magicofwinter"
         minSdkVersion 17
