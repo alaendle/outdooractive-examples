@@ -1,24 +1,20 @@
-language: scala
-scala:
-- 2.11.7
-jdk:
-- oraclejdk7
+language: android
+android:
+  components:
+    - build-tools-22.0.1
+    - android-22
+    - addon-google_apis-google-22
+    - extra-google-m2repository
+    - extra-android-m2repository
 
-before_install:
-# Install base Android SDK
-- sudo apt-get update -qq
-- sudo apt-get install -qq libstdc++6:i386 lib32z1 expect
-- export COMPONENTS=build-tools-22.0.0,android-22,addon-google_apis-google-22,extra-google-m2repository,extra-android-m2repository
-- curl -L https://raw.github.com/embarkmobile/android-sdk-installer/version-2/android-sdk-installer | bash /dev/stdin --install=$COMPONENTS
-- source ~/.android-sdk-installer/env
-
-script: sbt ++$TRAVIS_SCALA_VERSION android:package-release
+before_script:
+ - chmod +x gradlew
 
 deploy:
   provider: releases
   api_key:
     secure: V1TtRfwhYm7dRRDEUnLMs0t5vIymnIMd/+DtuEvNzgBt4+Vtn7VcWzw2gmEg1UTnwTeDBOuzUZKmBslJ9B4Ts0pUaqNmWcD+8EDs3s58QFFTY3OT6ZVG/V84xyLg0b/bRhAD9/9UZuJuHbf9Y/29IvysUAKXG7nsUHXRFFtSZlg=
-  file: ${TRAVIS_BUILD_DIR}/target/android-bin/com-outdooractive-example-magicOfWinter-release.apk
+  file: ${TRAVIS_BUILD_DIR}/app/build/outputs/apk/app-release.apk
   on:
     repo: alaendle/outdooractive-examples
     tags: true
