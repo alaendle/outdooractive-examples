@@ -17,7 +17,7 @@ android {
         abortOnError false
     }
     defaultConfig {
-        applicationId "com.outdooractive.example.magicofwinter"
+        applicationId "com.outdooractive.example.magicOfWinter"
         minSdkVersion 17
         targetSdkVersion 22
         versionCode 1
