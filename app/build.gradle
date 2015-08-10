@@ -1,0 +1,144 @@
+apply plugin: 'com.android.application'
+apply plugin: 'jp.leafytree.android-scala'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    signingConfigs {
+        outdooractive {
+            storeFile file('key.store')
+            storePassword System.getenv("storePass")
+            keyAlias "outdooractive"
+            keyPassword System.getenv("storePass")
+        }
+    }
+    defaultConfig {
+        applicationId "com.outdooractive.example.magicofwinter"
+        minSdkVersion 17
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0-2.11-gradle"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled true
+            proguardFiles file('proguard-rules.pro')
+        }
+        release {
+            minifyEnabled true
+            proguardFiles file('proguard-rules.pro')
+            signingConfig signingConfigs.outdooractive
+        }
+    }
+    packagingOptions {
+        exclude 'rootdoc.txt'
+        exclude 'decoder.properties'
+        exclude 'reflect.properties'
+        exclude 'compiler.properties'
+        exclude 'interactive.properties'
+        exclude 'repl.properties'
+        exclude 'library.properties'
+        exclude 'scalap.properties'
+        exclude 'META-INF/services/javax.script.ScriptEngineFactory'
+
+        // exlude https://github.com/saturday06/gradle-android-scala-plugin/issues/58
+        exclude 'scala'
+        exclude 'scala-async.properties'
+        exclude 'scala-parser-combinators.properties'
+        exclude 'scala-xml.properties'
+        exclude 'scala/tools'
+        exclude 'scala/tools/ant'
+        exclude 'scala/tools/ant/antlib.xml'
+        exclude 'scala/tools/ant/sabbus'
+        exclude 'scala/tools/ant/sabbus/antlib.xml'
+        exclude 'scala/tools/ant/templates'
+        exclude 'scala/tools/ant/templates/tool-unix.tmpl'
+        exclude 'scala/tools/ant/templates/tool-windows.tmpl'
+        exclude 'scala/tools/nsc'
+        exclude 'scala/tools/nsc/doc'
+        exclude 'scala/tools/nsc/doc/html'
+        exclude 'scala/tools/nsc/doc/html/resource'
+        exclude 'scala/tools/nsc/doc/html/resource/lib'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/arrow-down.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/arrow-right.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/class.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/class_big.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/class_diagram.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/class_to_object_big.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/constructorsbg.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/conversionbg.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/defbg-blue.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/defbg-green.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/diagrams.css'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/diagrams.js'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/filter_box_left.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/filter_box_left2.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/filter_box_right.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/filterbg.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/filterboxbarbg.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/filterboxbarbg.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/filterboxbg.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/fullcommenttopbg.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/index.css'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/index.js'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/jquery-ui.js'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/jquery.js'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/jquery.layout.js'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/modernizr.custom.js'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/navigation-li-a.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/navigation-li.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/object.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/object_big.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/object_diagram.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/object_to_class_big.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/object_to_trait_big.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/object_to_type_big.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/ownderbg2.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/ownerbg.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/ownerbg2.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/package.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/package_big.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/packagesbg.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/raphael-min.js'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/ref-index.css'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/remove.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/scheduler.js'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/selected-implicits.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/selected-right-implicits.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/selected-right.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/selected.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/selected2-right.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/selected2.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/signaturebg.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/signaturebg2.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/template.css'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/template.js'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/tools.tooltip.js'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/trait.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/trait_big.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/trait_diagram.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/trait_to_object_big.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/type.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/type_big.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/type_diagram.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/type_to_object_big.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/typebg.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/unselected.png'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/valuemembersbg.gif'
+        exclude 'scala/tools/nsc/doc/html/resource/lib/versions.txt'
+        exclude 'scalac-plugin.xml'
+        exclude 'scaladoc.properties'
+    }
+}
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.7'
+    compile 'com.google.android.gms:play-services-maps:7.5.0'
+    compile 'org.json4s:json4s-native_2.11:3.2.11'
+    compile 'org.macroid:macroid_2.11:2.0.0-M4'
+}
+
+tasks.withType(ScalaCompile) {
+    scalaCompileOptions.additionalParameters = ["-Xexperimental"]
+}
