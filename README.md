@@ -27,7 +27,7 @@ Comparison of original Java version with current Scala solution - measured with 
         <td>17</td>
         <td>97</td>
         <td>2</td>
-        <td>526</td>
+        <td>523</td>
     </tr>
 </table>
 

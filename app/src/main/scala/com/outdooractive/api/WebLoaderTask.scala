@@ -1,10 +1,9 @@
 package com.outdooractive.api
 
+import java.net.URL
+
 import scala.concurrent.Future
 import scala.io.Source
-
-import org.apache.http.client.methods.HttpGet
-import org.apache.http.impl.client.DefaultHttpClient
 
 import com.outdooractive.example.magicOfWinter.R
 
@@ -34,14 +33,12 @@ object WebLoaderTask extends Implicits {
 
   private def load(request: String) = Future {
     Log.i(WebLoaderTask.getClass.getName, "Request: " + request)
-    val httpGet = new HttpGet(request)
-    httpGet.addHeader("Accept", "application/json")
-    httpGet.addHeader("User-Agent", "Android Test OA")
-    val httpClient = new DefaultHttpClient
-    val response = httpClient.execute(httpGet)
-    val entity = Option(response.getEntity)
-    val resultString = entity map (x => Source.fromInputStream(x.getContent()).mkString(""))
+    val url = new URL(request)
+    val urlConnection = url.openConnection()
+    urlConnection.setRequestProperty("Accept", "application/json")
+    urlConnection.setRequestProperty("User-Agent", "Android Test OA")
+    val resultString = Source.fromInputStream(urlConnection.getInputStream()).mkString
     Log.i(WebLoaderTask.getClass.getName, "Result: " + resultString)
-    resultString.get
+    resultString
   }
 }
